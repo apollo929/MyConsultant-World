@@ -3,13 +3,13 @@
     <div class="row mb-5">
       <div class="col-md-12 col-lg-12 col-sm-12 text-center">
         <h2 class="color-light-black">
-          <span translate>Step into the Classroom</span>...<br />
+          <span translate>Step into the Task Site</span>...<br />
           <span translate>Anytime. Anywhere.</span>
         </h2>
         <p class="content-title mt-3" translate>
-          <span translate>Get instant access to learning in countless subjects. With</span>
+          <span translate>Get instant access to working in countless tasks. With</span>
           <br />
-          <span translate>hundreds of live streaming lessons available 24/7.</span>
+          <span translate>hundreds of live streaming tasks available 24/7.</span>
         </p>
       </div>
     </div>
@@ -31,21 +31,21 @@
       </div> -->
       <div class="col-md-12 d-flex justify-content-between mt-n2 rmt-4 rd-block">
         <div class="form-group mr-3 rmr-0">
-          <label class="font-weight-bold font-sm" translate>Filter By Grades</label>
+          <label class="font-weight-bold font-sm" translate>Filter By Job Types</label>
           <select class="custom-select" [(ngModel)]="searchFields.gradeIds" (change)="gradeChange($event)">
             <option class="subject" selected value="" translate>None</option>
             <option class="subject" *ngFor="let item of grades" ngValue="{{ item._id }}">{{ item.name }}</option>
           </select>
         </div>
         <div class="form-group mr-3 rmr-0">
-          <label class="font-weight-bold font-sm" translate>Filter By Categories</label>
+          <label class="font-weight-bold font-sm" translate>Filter By Skills</label>
           <select class="custom-select" [(ngModel)]="searchFields.categoryIds" (change)="selectCategory()">
             <option selected translate value="">None</option>
             <option *ngFor="let cate of categories" value="{{cate._id}}">{{cate.name}}</option>
           </select>
         </div>
         <div class="form-group mr-3 rmr-0">
-          <label class="font-weight-bold font-sm" translate>Filter By Subjects</label>
+          <label class="font-weight-bold font-sm" translate>Filter By Titles</label>
           <select class="custom-select" [(ngModel)]="searchFields.subjectIds" (change)="selectSubject()">
             <option selected translate value="">None</option>
             <option *ngFor="let sub of subjects" value="{{sub._id}}">{{sub.name}}</option>
@@ -76,7 +76,7 @@
     </div>
     <div class="row mt-4 mb-3">
       <div class="col-md-12">
-        <h4><strong translate>GROUP CLASSES</strong></h4>
+        <h4><strong translate>Group Consultants</strong></h4>
         <div class="input-group shadow-sm input-shadow br-3" style="margin-top: 1.82em">
           <div class="input-group-prepend border-none">
             <span class="input-group-text">

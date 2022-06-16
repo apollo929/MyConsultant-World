@@ -73,7 +73,7 @@
           <thead>
             <tr role="row">
               <th>
-                <span (click)="sortBy('tutorId', 'asc')" translate>Tutor name</span>
+                <span (click)="sortBy('tutorId', 'asc')" translate>Consultant name</span>
                 <app-sort [sortOption]="sortOption" [sortBy]="'tutorId'" (onSort)="onSort($event)"></app-sort>
               </th>
               <th>
@@ -81,7 +81,7 @@
                 <app-sort [sortOption]="sortOption" [sortBy]="'subject'" (onSort)="onSort($event)"></app-sort>
               </th>
               <th>
-                <span (click)="sortBy('webinar', 'asc')" translate>Group Class</span>
+                <span (click)="sortBy('webinar', 'asc')" translate>Consultant Group</span>
                 <app-sort [sortOption]="sortOption" [sortBy]="'webinar'" (onSort)="onSort($event)"></app-sort>
               </th>
               <th>

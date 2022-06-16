@@ -195,7 +195,7 @@ export class TutorProfileComponent implements OnInit, AfterViewInit {
         .favorite(params, 'tutor')
         .then(res => {
           this.tutor.isFavorite = true;
-          this.toasty.success(this.translate.instant('Added to your favorite tutor list successfully!'));
+          this.toasty.success(this.translate.instant('Added to your favorite consultant list successfully!'));
         })
         .catch(() => this.toasty.error(this.translate.instant('Something went wrong, please try again!')));
     }
@@ -208,7 +208,7 @@ export class TutorProfileComponent implements OnInit, AfterViewInit {
         .unFavorite(this.tutor._id, 'tutor')
         .then(res => {
           this.tutor.isFavorite = false;
-          this.toasty.success(this.translate.instant('Deleted from your favorite tutor list successfully!'));
+          this.toasty.success(this.translate.instant('Deleted from your favorite consultant list successfully!'));
         })
         .catch(() => this.toasty.error(this.translate.instant('Something went wrong, please try again!')));
     }

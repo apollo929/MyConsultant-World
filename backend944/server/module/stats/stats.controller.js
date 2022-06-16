@@ -55,12 +55,12 @@ exports.stats = async (req, res, next) => {
     let totalRevenue = 0;
     let payoutRequestPending = 0;
     if (totalPricePaidByUser && totalPricePaidByUser.length) {
-      totalPricePaidByUser.map(item => {
+      totalPricePaidByUser.map((item) => {
         totalRevenue += item.total;
       });
     }
     if (payoutRequestPendingByTutor && payoutRequestPendingByTutor.length) {
-      payoutRequestPendingByTutor.map(item => {
+      payoutRequestPendingByTutor.map((item) => {
         payoutRequestPending += item.total;
       });
     }

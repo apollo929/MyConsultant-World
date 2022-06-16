@@ -112,17 +112,17 @@ const schema = new Schema({
     type: Date
   }
 }, {
-    timestamps: {
-      createdAt: 'createdAt',
-      updatedAt: 'updatedAt'
-    },
-    toJSON: {
-      virtuals: true
-    },
-    toObject: {
-      virtuals: true
-    }
-  });
+  timestamps: {
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  },
+  toJSON: {
+    virtuals: true
+  },
+  toObject: {
+    virtuals: true
+  }
+});
 
 schema.virtual('user', {
   ref: 'User',

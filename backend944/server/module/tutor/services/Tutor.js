@@ -1,6 +1,7 @@
 const url = require('url');
 const nconf = require('nconf');
-exports.register = async data => {
+
+exports.register = async (data) => {
   try {
     const count = await DB.User.count({
       email: data.email.toLowerCase()
@@ -40,6 +41,13 @@ exports.register = async data => {
       username = `${username}-${Helper.String.randomString(5)}`;
     }
     user.username = username;
+
+    // user.country = data.country.name;
+    user.countryCode = data.country.code;
+    // user.state = (data.country.state == null) ? "" : ;
+    user.city = data.country.capital;
+
+
     await user.save();
 
     // now send email verificaiton to user
@@ -51,7 +59,7 @@ exports.register = async data => {
     });
 
     await Service.Mailer.send('tutor/new-account-register.html', process.env.ADMIN_EMAIL, {
-      subject: 'New Registered Teacher',
+      subject: 'New Registered Consultant',
       tutor: user.toObject(),
       adminUrl: process.env.adminURL
     });
@@ -101,7 +109,7 @@ exports.reject = async (tutorId, reason) => {
   }
 };
 
-exports.approve = async tutorId => {
+exports.approve = async (tutorId) => {
   try {
     const tutor = tutorId instanceof DB.User ? tutorId : await DB.User.findOne({ _id: tutorId });
     if (!tutor) {
@@ -140,7 +148,7 @@ exports.approve = async tutorId => {
   }
 };
 
-exports.zoomAccountCreated = async zoomInfo => {
+exports.zoomAccountCreated = async (zoomInfo) => {
   try {
     const tutor = await DB.User.findOne({ email: zoomInfo.email });
     if (!tutor) {
@@ -155,7 +163,7 @@ exports.zoomAccountCreated = async zoomInfo => {
   }
 };
 
-exports.zoomAccountDeleted = async zoomInfo => {
+exports.zoomAccountDeleted = async (zoomInfo) => {
   try {
     const tutor = await DB.User.findOne({ email: zoomInfo.email });
     if (!tutor) {
@@ -164,7 +172,7 @@ exports.zoomAccountDeleted = async zoomInfo => {
     tutor.isZoomAccount = false;
     await tutor.save();
     await Service.Mailer.send('tutor/deleted-on-zoom.html', tutor.email, {
-      subject: `Temporarily suspending the tutor's activities!`,
+      subject: 'Temporarily suspending the tutor\'s activities!',
       tutor: tutor.toObject(),
       appName: process.env.APP_NAME,
       adminEmail: process.env.ADMIN_EMAIL
@@ -181,10 +189,10 @@ exports.zoomAccountChangeStatus = async (zoomInfo, status) => {
     if (!tutor) {
       throw new Error('Can not found tutor');
     }
-    tutor.isZoomAccount = status === 'user.activated' ? true : false;
+    tutor.isZoomAccount = status === 'user.activated';
     await tutor.save();
     await Service.Mailer.send('tutor/deleted-on-zoom.html', tutor.email, {
-      subject: `Temporarily suspending the tutor's activities!`,
+      subject: 'Temporarily suspending the tutor\'s activities!',
       tutor: tutor.toObject(),
       appName: process.env.APP_NAME,
       adminEmail: process.env.ADMIN_EMAIL

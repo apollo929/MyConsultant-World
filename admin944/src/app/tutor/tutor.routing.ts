@@ -10,7 +10,7 @@ const routes: Routes = [
     path: 'create',
     component: TutorCreateComponent,
     data: {
-      title: 'Create New Tutor',
+      title: 'Create New Consultant',
       urls: [{ title: 'Tutors', url: '/tutor/list' }, { title: 'Listing' }]
     },
     resolve: {
@@ -21,16 +21,16 @@ const routes: Routes = [
     path: 'list',
     component: TutorListingComponent,
     data: {
-      title: 'Tutor manager',
-      urls: [{ title: 'Tutors', url: '/tutor/list' }, { title: 'Listing' }]
+      title: 'Consultant Manager',
+      urls: [{ title: 'Consultants', url: '/tutor/list' }, { title: 'Listing' }]
     }
   },
   {
     path: 'update/:id',
     component: TutorUpdateComponent,
     data: {
-      title: 'Update tutor',
-      urls: [{ title: 'Tutors', url: '/tutor/list' }, { title: 'Update' }]
+      title: 'Update consultant',
+      urls: [{ title: 'Consultants', url: '/tutor/list' }, { title: 'Update' }]
     },
     resolve: {
       appConfig: ConfigResolver

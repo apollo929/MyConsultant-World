@@ -6,10 +6,10 @@
           <div class="wizard-inner">
             <ul class="nav nav-tabs d-flex justify-content-center" role="tablist">
               <li role="presentation" [ngClass]="{'active': tab === 'subject'}">
-                <a href="javascript:void(0)" (click)="onTabSelect('subject')" translate>One on One Classes</a>
+                <a href="javascript:void(0)" (click)="onTabSelect('subject')" translate>One on One relation</a>
               </li>
               <li role="presentation" [ngClass]="{'active': tab === 'webinar'}">
-                <a href="javascript:void(0)" (click)="onTabSelect('webinar')" translate>Group Classes</a>
+                <a href="javascript:void(0)" (click)="onTabSelect('webinar')" translate>Group Consultants</a>
               </li>
             </ul>
           </div>
@@ -48,7 +48,7 @@
                     type="search"
                     class="form-control form-control-sm"
                     aria-controls="table_id"
-                    placeholder="{{'Search tutor, user, subject'|translate}}"
+                    placeholder="{{'Search consultant, customer, titles'|translate}}"
                     (keyup)="doSearch($event)"
                   />
                 </label>
@@ -74,7 +74,7 @@
                     aria-sort="ascending"
                     aria-label="Tutor Name: activate to sort column descending"
                   >
-                    <span (click)="sortBy('tutorId', 'desc')" translate>Tutor name</span>
+                    <span (click)="sortBy('tutorId', 'desc')" translate>Consultant name</span>
                     <app-sort [sortOption]="sortOption" [sortBy]="'tutorId'" (onSort)="onSort($event)"></app-sort>
                   </th>
 
@@ -85,7 +85,7 @@
                     colspan="1"
                     aria-label="Subject: activate to sort column ascending"
                   >
-                    <span (click)="sortBy('webinarId', 'desc')" translate>Subjects / Group Class</span>
+                    <span (click)="sortBy('webinarId', 'desc')" translate>Titles / Consultant Group</span>
                     <app-sort [sortOption]="sortOption" [sortBy]="'webinarId'" (onSort)="onSort($event)"></app-sort>
                   </th>
                   <th
@@ -105,7 +105,7 @@
                     colspan="1"
                     aria-label="Lesson Type: activate to sort column ascending"
                   >
-                    <span (click)="sortBy('isFree', 'desc')" translate>Lesson type</span>
+                    <span (click)="sortBy('isFree', 'desc')" translate>Job type</span>
                     <app-sort [sortOption]="sortOption" [sortBy]="'isFree'" (onSort)="onSort($event)"></app-sort>
                   </th>
                   <th
@@ -171,7 +171,7 @@
               </thead>
               <tbody>
                 <tr *ngIf="!appointments.length && !loading">
-                  <td translate colspan="9">There are no lessons</td>
+                  <td translate colspan="9">There are no jobs</td>
                 </tr>
                 <tr *ngIf="loading">
                   <td translate colspan="9">Loading...</td>
@@ -273,7 +273,7 @@
                   type="search"
                   class="form-control form-control-sm"
                   aria-controls="table_id"
-                  placeholder="{{'Search tutor, user, webinar'|translate}}"
+                  placeholder="{{'Search consultant, customer, webinar'|translate}}"
                   (keyup)="doSearch($event)"
                 />
               </label>
@@ -292,12 +292,12 @@
               <thead>
                 <tr role="row">
                   <th>
-                    <span (click)="sortBy('tutorId', 'asc')" translate>Tutor name</span>
+                    <span (click)="sortBy('tutorId', 'asc')" translate>Consultant name</span>
                     <app-sort [sortOption]="sortOption" [sortBy]="'tutorId'" (onSort)="onSort($event)"></app-sort>
                   </th>
 
                   <th>
-                    <span (click)="sortBy('webinar', 'asc')" translate>Group Class</span>
+                    <span (click)="sortBy('webinar', 'asc')" translate>Consultant Group</span>
                     <app-sort [sortOption]="sortOption" [sortBy]="'webinar'" (onSort)="onSort($event)"></app-sort>
                   </th>
 

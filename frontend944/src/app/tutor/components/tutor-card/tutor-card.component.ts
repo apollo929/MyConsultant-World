@@ -44,7 +44,7 @@ export class TutorCardComponent implements OnInit {
         .favorite(params, 'tutor')
         .then(res => {
           this.tutor.isFavorite = true;
-          this.toastService.success(this.translate.instant('Added to your favorite tutor list successfully!'));
+          this.toastService.success(this.translate.instant('Added to your favorite consultant list successfully!'));
         })
         .catch(() => this.toastService.error(this.translate.instant('Something went wrong, please try again!')));
     }
@@ -57,7 +57,7 @@ export class TutorCardComponent implements OnInit {
         .unFavorite(this.tutor._id, 'tutor')
         .then(res => {
           this.tutor.isFavorite = false;
-          this.toastService.success(this.translate.instant('Deleted from your favorite tutor list successfully!'));
+          this.toastService.success(this.translate.instant('Deleted from your favorite consultant list successfully!'));
         })
         .catch(() => this.toastService.error(this.translate.instant('Something went wrong, please try again!')));
     }

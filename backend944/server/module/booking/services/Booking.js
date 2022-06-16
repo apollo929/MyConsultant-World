@@ -2,12 +2,13 @@ const moment = require('moment');
 const enrollQ = require('../../webinar/queue');
 const momentTimeZone = require('moment-timezone');
 const date = require('../../date');
-exports.canBookFree = async userId => {
+
+exports.canBookFree = async (userId) => {
   try {
     const maxFreeSlotToBook = await DB.Config.findOne({ key: 'maxFreeSlotToBook' });
     const maxFreeSlotToBookValue = maxFreeSlotToBook.value;
     const count = await DB.Appointment.count({
-      userId: userId,
+      userId,
       isFree: true,
       status: { $ne: 'canceled' }
     });
@@ -18,7 +19,7 @@ exports.canBookFree = async userId => {
   }
 };
 
-exports.canBookFreeWithTutor = async options => {
+exports.canBookFreeWithTutor = async (options) => {
   try {
     const count = await DB.Appointment.count({
       userId: options.userId,
@@ -34,7 +35,7 @@ exports.canBookFreeWithTutor = async options => {
   }
 };
 
-exports.create = async options => {
+exports.create = async (options) => {
   try {
     if (moment(options.startTime).isBefore(moment())) {
       throw new Error('Cannot book with start time in the past');
@@ -84,7 +85,7 @@ exports.create = async options => {
     }
     // do check for free booking
     if (options.isFree && !options.couponCode) {
-      //check if user can book more free trial class
+      // check if user can book more free trial class
       const canBookFree = await this.canBookFree(options.userId);
       if (!canBookFree) {
         throw new Error('You have taken for the maximum number of free trial classes');
@@ -96,15 +97,13 @@ exports.create = async options => {
       }
     }
 
-    const appointment = new DB.Appointment(
-      Object.assign(options, {
-        description: `${user.name} booking slot of ${subject.name} with ${tutor.name}`,
-        topicId: options.targetId,
-        subjectId: topic.mySubjectId,
-        categoryId: topic.myCategoryId,
-        status: 'canceled'
-      })
-    );
+    const appointment = new DB.Appointment(Object.assign(options, {
+      description: `${user.name} booking slot of ${subject.name} with ${tutor.name}`,
+      topicId: options.targetId,
+      subjectId: topic.mySubjectId,
+      categoryId: topic.myCategoryId,
+      status: 'canceled'
+    }));
     appointment.paid = options.isFree || false;
     const data = {
       appointmentId: appointment._id,
@@ -167,7 +166,7 @@ exports.create = async options => {
         date.isDTS(appointment.toTime, tutor.timezone || '')
       );
 
-      if (tutor.notificationSettings)
+      if (tutor.notificationSettings) {
         await Service.Mailer.send('appointment/confirm-book-free-tutor.html', tutor.email, {
           subject: `User ${user.name} booked a slot free!`,
           tutor: tutor.getPublicProfile(),
@@ -176,8 +175,9 @@ exports.create = async options => {
           startTimeTutor,
           toTimeTutor
         });
+      }
 
-      if (user.notificationSettings)
+      if (user.notificationSettings) {
         await Service.Mailer.send('appointment/confirm-book-free-user.html', user.email, {
           subject: `Successfully booked 1 free slot with tutor ${tutor.name}`,
           tutor: tutor.getPublicProfile(),
@@ -186,6 +186,7 @@ exports.create = async options => {
           startTimeUser,
           toTimeUser
         });
+      }
       return transaction;
     }
     await appointment.save();
@@ -196,7 +197,7 @@ exports.create = async options => {
   }
 };
 
-exports.checkOverlapSlot = async options => {
+exports.checkOverlapSlot = async (options) => {
   try {
     const query = {
       userId: options.userId,
@@ -225,7 +226,7 @@ exports.checkOverlapSlot = async options => {
       ]
     };
     const count = await DB.Appointment.count(query);
-    return count > 0 ? false : true;
+    return !(count > 0);
   } catch (e) {
     throw e;
   }

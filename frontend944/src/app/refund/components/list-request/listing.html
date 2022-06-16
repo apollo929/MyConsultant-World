@@ -60,7 +60,7 @@
                     aria-sort="ascending"
                     aria-label="Tutor Name: activate to sort column descending"
                   >
-                    <span (click)="sortBy('tutorId', 'desc')" translate>Tutor name</span>
+                    <span (click)="sortBy('tutorId', 'desc')" translate>Consultant name</span>
                     <app-sort [sortOption]="sortOption" [sortBy]="'tutorId'" (onSort)="onSort($event)"></app-sort>
                   </th>
 
@@ -81,7 +81,7 @@
                     colspan="1"
                     aria-label="Group Class: activate to sort column ascending"
                   >
-                    <span (click)="sortBy('webinarId', 'desc')" translate>Group Class</span>
+                    <span (click)="sortBy('webinarId', 'desc')" translate>Group</span>
                     <app-sort [sortOption]="sortOption" [sortBy]="'webinarId'" (onSort)="onSort($event)"></app-sort>
                   </th>
 

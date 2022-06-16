@@ -9,16 +9,19 @@ export const environment = {
   build: 1,
   showBuild: true,
   maximumFileSize: 1024,
-  apiBaseUrl: 'https://v2-api.livelearn.info/v1',
+  // apiBaseUrl: 'https://v2-api.livelearn.info/v1',                    //Test Site Environment
   // stripeKey: 'pk_test_GAOwgdMyHnXkj9v9HcTCyu7E00kA8x0Oh1',
   // url: 'https://v2.livelearn.info',
-  socketUrl: 'https://v2-api.livelearn.info',
+  // socketUrl: 'https://v2-api.livelearn.info',                        //Test Site Environment
+  // apiBaseUrl: 'https://api.mytutoring.pro/v1', //Live Site Environment:Fetch data from server(Snapshot)
+  // socketUrl: 'https://api.mytutoring.pro',    //Live Site Environment:Fetch data from server(Snapshot)
+  ////
   // apiBaseUrl: 'http://localhost:9000/v1',
   // stripeKey:
   //   'pk_test_51ICH44Kd3OO2kXBrHboC6do0v3IxAPXeNfvUePcLWQGJ15jsXNe2O26RqhRZ3QnJsIX8cxLs7V9DUFbfPT8hSxoI00wNfKakjw',
   // url: 'https://regular.livelearn.info',
-  // socketUrl: 'http://localhost:9000',
-  // apiBaseUrl: 'http://localhost:9000/v1',
+  socketUrl: 'http://localhost:9000',
+  apiBaseUrl: 'http://localhost:9000/v1',
   stripeKey:
     'pk_test_51ICH44Kd3OO2kXBrHboC6do0v3IxAPXeNfvUePcLWQGJ15jsXNe2O26RqhRZ3QnJsIX8cxLs7V9DUFbfPT8hSxoI00wNfKakjw',
   url: 'https://regular.livelearn.info',

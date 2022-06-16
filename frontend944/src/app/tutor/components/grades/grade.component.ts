@@ -6,7 +6,7 @@ import { IGrade } from '../../../user/interface';
   selector: 'grade-tutor',
   template: `
     <select class="custom-select" [(ngModel)]="searchFields.grade" (change)="gradeChange()">
-      <option class="subject" selected value="" translate>Grades</option>
+      <option class="subject" selected value="" translate>Job Types</option>
       <option class="subject" *ngFor="let item of grades" ngValue="{{ item._id }}">{{ item.name }}</option>
     </select>
   `

@@ -31,7 +31,7 @@ exports.cancel = async (appointmentId, reason, cancelBy) => {
   }
 };
 
-exports.canAdd = async options => {
+exports.canAdd = async (options) => {
   try {
     // TODO - dont need check pending appointment
     const count = await DB.Appointment.count({
@@ -66,7 +66,7 @@ exports.canAdd = async options => {
   }
 };
 
-exports.sendNotify = async appointmentId => {
+exports.sendNotify = async (appointmentId) => {
   try {
     const appointment = appointmentId instanceof DB.Appointment ? appointmentId : await DB.Appointment.findOne({ _id: appointmentId });
     if (!appointment) {
@@ -76,7 +76,7 @@ exports.sendNotify = async appointmentId => {
     const tutor = await DB.User.findOne({ _id: appointment.tutorId });
     const user = await DB.User.findOne({ _id: appointment.userId });
     if (!tutor || !user) {
-      throw new Error('Cannot found user or tutor');
+      throw new Error('Cannot found user or consultant');
     }
 
     // create zoom us link
@@ -90,27 +90,29 @@ exports.sendNotify = async appointmentId => {
     }
 
     const timeFormat = moment(appointment.startTime).format('DD/MM/YYYY HH:mm');
-    if (tutor.notificationSettings)
+    if (tutor.notificationSettings) {
       await Service.Mailer.send('appointment/notification-tutor.html', tutor.email, {
         subject: `[Notification] Réservation #${appointment.code} à ${timeFormat}`,
         appointment: appointment.toObject(),
         tutor: tutor.getPublicProfile(),
         user: user.getPublicProfile()
       });
+    }
 
-    if (user.notificationSettings)
+    if (user.notificationSettings) {
       await Service.Mailer.send('appointment/notification-user.html', user.email, {
         subject: `[Notification] Réservation #${appointment.code} à ${timeFormat}`,
         appointment: appointment.toObject(),
         tutor: tutor.getPublicProfile(),
         user: user.getPublicProfile()
       });
+    }
   } catch (e) {
     throw e;
   }
 };
 
-exports.complete = async appointmentId => {
+exports.complete = async (appointmentId) => {
   try {
     const appointment = appointmentId instanceof DB.Appointment ? appointmentId : await DB.Appointment.findOne({ _id: appointmentId });
     if (!appointment) {
@@ -123,7 +125,7 @@ exports.complete = async appointmentId => {
     const user = await DB.User.findOne({ _id: appointment.userId });
     const tutor = await DB.User.findOne({ _id: appointment.tutorId });
 
-    if (user.notificationSettings)
+    if (user.notificationSettings) {
       await Service.Mailer.send('review/notify-review.html', user.email, {
         subject: `Réservation ${appointment.code} a été complètement réalisée`,
         appointment: appointment.toObject(),
@@ -131,8 +133,9 @@ exports.complete = async appointmentId => {
         user: user.getPublicProfile(),
         reviewLink: url.resolve(process.env.userWebUrl, `appointments/${appointment._id}/reviews`)
       });
+    }
 
-    if (tutor.notificationSettings)
+    if (tutor.notificationSettings) {
       await Service.Mailer.send('review/notify-review.html', tutor.email, {
         subject: `Réservation ${appointment.code} a été complètement réalisée`,
         appointment: appointment.toObject(),
@@ -140,12 +143,13 @@ exports.complete = async appointmentId => {
         user: user.getPublicProfile(),
         reviewLink: url.resolve(process.env.userWebUrl, `appointments/${appointment._id}/reviews`)
       });
+    }
   } catch (e) {
     throw e;
   }
 };
 
-exports.endMeeting = async zoomMeetingId => {
+exports.endMeeting = async (zoomMeetingId) => {
   try {
     const appointment = await DB.Appointment.findOne({ meetingId: zoomMeetingId });
     if (!appointment) {

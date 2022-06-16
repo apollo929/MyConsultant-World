@@ -54,7 +54,7 @@
     </thead>
     <tbody>
       <tr *ngIf="!appointments.length">
-        <td translate colspan="9">There are no lessons</td>
+        <td translate colspan="9">There are no tasks</td>
       </tr>
       <tr *ngFor="let item of appointments, let i = index">
         <td>{{item?.startTime |dstFormat | date:'dd/MM/yyyy, HH:mma'}}</td>

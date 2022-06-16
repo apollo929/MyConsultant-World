@@ -40,7 +40,7 @@
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label>Category (*)</label>
+                  <label>Job-Skill (*)</label>
                   <ng-select
                     [items]="categories"
                     [hideSelected]="true"
@@ -48,7 +48,7 @@
                     bindLabel="name"
                     [closeOnSelect]="true"
                     name="category"
-                    placeholder="Choose category"
+                    placeholder="Choose job-skill"
                     [(ngModel)]="subject.categoryIds"
                     bindValue="_id"
                     #categoryId="ngModel"
@@ -56,7 +56,7 @@
                   >
                   </ng-select>
                   <div *ngIf="categoryId.errors && (categoryId.dirty || categoryId.touched || isSubmitted)">
-                    <p [hidden]="!categoryId.errors.required" style="color: red" translate>Please choose category!</p>
+                    <p [hidden]="!categoryId.errors.required" style="color: red" translate>Please choose job-skill!</p>
                   </div>
                 </div>
               </div>

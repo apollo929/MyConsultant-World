@@ -7,7 +7,7 @@
           <thead>
             <tr>
               <th>
-                <a (click)="sortBy('tutorId', 'desc')" translate>Tutor name</a>
+                <a (click)="sortBy('tutorId', 'desc')" translate>Consultant name</a>
                 <span *ngIf="sortOption.sortBy=='tutorId'">
                   <a (click)="sortBy('tutorId', 'asc')" *ngIf="sortOption.sortType=='desc'"
                     ><i class="fa fa-caret-down"></i
@@ -18,7 +18,7 @@
                 </span>
               </th>
               <th>
-                <a (click)="sortBy('userId', 'desc')" translate>User name</a>
+                <a (click)="sortBy('userId', 'desc')" translate>Customer name</a>
                 <span *ngIf="sortOption.sortBy=='userId'">
                   <a (click)="sortBy('userId', 'asc')" *ngIf="sortOption.sortType=='desc'"
                     ><i class="fa fa-caret-down"></i
@@ -29,7 +29,7 @@
                 </span>
               </th>
               <th>
-                <a (click)="sortBy('webinarId', 'desc')" translate>Group Class</a>
+                <a (click)="sortBy('webinarId', 'desc')" translate>Consultant Group</a>
                 <span *ngIf="sortOption.sortBy=='webinarId'">
                   <a (click)="sortBy('webinarId', 'asc')" *ngIf="sortOption.sortType=='desc'"
                     ><i class="fa fa-caret-down"></i
@@ -128,7 +128,7 @@
                   [resultTemplate]="rt"
                   [inputFormatter]="formatter"
                   (keyup)="onKeyup('tutorId')"
-                  placeholder="Search tutor"
+                  placeholder="Search consultant"
                 />
                 <ng-template #rt let-r="result" let-t="term">
                   <ngb-highlight [result]="r.name" [term]="t">{{r?.name}}</ngb-highlight>

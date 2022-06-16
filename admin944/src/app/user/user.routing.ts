@@ -15,23 +15,23 @@ const routes: Routes = [
   },
   { path: 'create', component: UserCreateComponent ,
   data: {
-    title: 'Create New User',
-    urls: [{ title: 'Users', url: '/users/list' }, { title: 'Listing' }]
+    title: 'Create New Customer',
+    urls: [{ title: 'Customers', url: '/users/list' }, { title: 'Listing' }]
   }
   },
   {
     path: 'list',
     component: UserListingComponent,
     data: {
-      title: 'Users manager',
-      urls: [{ title: 'Users',url: '/users/list' }, { title: 'Listing' }]
+      title: 'Customers Manager',
+      urls: [{ title: 'Customers',url: '/users/list' }, { title: 'Listing' }]
     }
   },
   {
     path: 'update/:id', component: UserUpdateComponent,
     data: {
-      title: 'Users update',
-      urls: [{ title: 'Users',url: '/users/list' }, { title: 'Update' }]
+      title: 'Customers update',
+      urls: [{ title: 'Customers',url: '/users/list' }, { title: 'Update' }]
     }
   }
 ];

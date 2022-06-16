@@ -66,6 +66,8 @@ async function isAuthenticated(req, res, next) {
   }
 }
 
+
+
 async function loadUser(req, res, next) {
   const decoded = getDecoded(req);
   if (decoded === null) {

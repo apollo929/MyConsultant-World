@@ -54,7 +54,7 @@ export class WebinarListingComponent implements OnInit {
     private topicService: TopicService,
     private translate: TranslateService
   ) {
-    seoService.update('List Group Classes');
+    seoService.update('List group consultants');
     this.config = this.route.snapshot.data['appConfig'];
   }
 

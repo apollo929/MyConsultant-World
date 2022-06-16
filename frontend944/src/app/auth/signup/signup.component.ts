@@ -1,10 +1,14 @@
 import { SeoService } from './../../shared/services/seo.service';
-import { Component } from '@angular/core';
+import { Component,Output, EventEmitter} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../shared/services';
 import { ToastrService } from 'ngx-toastr';
 import * as _ from 'lodash';
 import { TranslateService } from '@ngx-translate/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AvatarUploadComponent } from '../../media/components/avatar-upload/avatar-upload.component';
+
+import { CountryService } from './../../shared/services/country.service';
 
 @Component({
   templateUrl: 'signup.component.html'
@@ -24,7 +28,9 @@ export class SignupComponent {
     bio: '',
     timezone: '',
     introVideoId: '',
-    introYoutubeId: ''
+    avatar: '',
+    introYoutubeId: '',
+    country: '',
   };
 
   public quillConfig = {
@@ -59,10 +65,12 @@ export class SignupComponent {
       }
     }
   };
+  @Output() afterCancel = new EventEmitter();
   public introVideoType: string = 'upload';
   public confirm: any = {
     pw: ''
   };
+  public checkAvatar: boolean;
   public maxFileSize: number;
   public isMath: boolean = false;
   public submitted: boolean = false;
@@ -70,13 +78,16 @@ export class SignupComponent {
   public resumeOptions: any = {};
   public certificationOptions: any = {};
   public introVideoOptions: any = {};
+  public introImageOptions: any = {};
   public idDocumentFile: any;
   public resumeFile: any;
   public certificationFile: any;
   public introVideo: any;
+  public introImage: any;
   public appConfig: any;
   public loading: boolean = false;
   public agree: boolean = true;
+  public countries: any;
 
   constructor(
     private auth: AuthService,
@@ -84,7 +95,9 @@ export class SignupComponent {
     private toasty: ToastrService,
     private route: ActivatedRoute,
     private seoService: SeoService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private countryService: CountryService,
+    private modalService: NgbModal,
   ) {
     this.maxFileSize = window.appConfig.maximumFileSize;
     this.appConfig = this.route.snapshot.data.appConfig;
@@ -111,6 +124,27 @@ export class SignupComponent {
       },
       uploadOnSelect: true,
       id: 'id-introVideo',
+      onUploading: resp => (this.loading = true)
+    };
+    
+    this.introImageOptions = {
+      url: window.appConfig.apiBaseUrl + '/tutors/upload-introImage',
+      onCompleteItem: resp => {
+        this.accountTutor.avatar = "/avatar/" + resp.data.name;
+        this.loading = false;
+      },
+      onFileSelect: resp => {
+        const lastIndex = resp.length - 1;
+        const file = resp[lastIndex].file;
+        const ext = file.name.split('.').pop().toLowerCase();
+        if (['jpg', 'png', 'jpeg'].indexOf(ext) === -1) {
+          this.introImageOptions.uploader.clearQueue();
+          return this.toasty.error(this.translate.instant('Invalid file type'));
+        }
+        this.introImage = file;
+      },
+      uploadOnSelect: true,
+      id: 'id-introImage',
       onUploading: resp => (this.loading = true)
     };
 
@@ -176,9 +210,29 @@ export class SignupComponent {
     // };
   }
 
+  open() {
+    console.log('----');
+    const modalRef = this.modalService.open(AvatarUploadComponent, { centered: true, backdrop: 'static' });
+    // const modalRef = this.modalService.open(AvatarUploadComponent, { centered: true, backdrop: 'static' });
+    modalRef.componentInstance.info = this.account;
+    modalRef.result.then(
+      res => {
+        this.afterCancel.emit(res);
+        this.account.avatarUrl = res;
+        this.checkAvatar = true;
+      },
+      () => {}
+    );
+  }
+
+  async ngOnInit() {
+    this.countries = this.countryService.getCountry();
+  }
+
   public onlyNumberKey(event) {
     return event.charCode === 8 || event.charCode === 0 ? null : event.charCode >= 48 && event.charCode <= 57;
   }
+
 
   public async submit(frm: any) {
     this.submitted = true;
@@ -203,6 +257,7 @@ export class SignupComponent {
       this.accountTutor.email = this.account.email;
       this.accountTutor.password = this.account.password;
       this.accountTutor.timezone = this.account.timezone;
+      this.accountTutor.country = this.account.country;
       // if (this.introVideoType == 'youtube' && !this.accountTutor.introYoutubeId) {
       //   console.log(this.accountTutor.introYoutubeId);
 

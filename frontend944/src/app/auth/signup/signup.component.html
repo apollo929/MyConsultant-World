@@ -12,8 +12,8 @@
         <!--end::Aside header-->
         <!--begin::Aside Title-->
         <p class="mt-4 text-center sub-content" translate>
-          <span translate>Join Pinlearn For Free</span> <br />
-          <span translate>Explore a huge range of subjects.</span>
+          <span translate>Join My Consultant World For Free</span> <br />
+          <span translate>Explore a huge range of works.</span>
         </p>
         <!--end::Aside Title-->
       </div>
@@ -169,9 +169,7 @@
                   {{ introVideo.name }}
                 </p>
                 <app-file-upload [options]="introVideoOptions"></app-file-upload>
-                <small translate
-                  >Upload mp4 file, webm file, 3gp file, ogg file, wmv file or webm file for your video</small
-                >
+                <small translate>Upload mp4 file, webm file, 3gp file, ogg file, wmv file or webm file for your video</small>
               </div>
 
               <div id="signup-bio" class="form-group mt-3" *ngIf="account.type === 'tutor'">
@@ -183,6 +181,32 @@
                   name="bio"
                 >
                 </quill-editor>
+              </div>
+
+              <!-- <AvatarUploadComponent></AvatarUploadComponent> -->
+              <div *ngIf="account.type === 'tutor'">
+                <p translate>Please upload profile photo</p>
+                <app-file-upload [options]="introImageOptions"></app-file-upload>
+                <small translate>Upload jpg file, jpeg file or png file for your video</small>
+              </div>
+              <div
+                class="justify-content-between align-items-center mb-3 form-group border-bottom"
+                [ngClass]="d-flex"
+                *ngIf="account.type === 'tutor'"
+              >
+                <h6><span translate>Country</span>:</h6>
+                <ng-select
+                  [items]="countries"
+                  appendTo="body"
+                  name="country"
+                  bindLabel="name"
+                  [multiple]="false"
+                  [closeOnSelect]="true"
+                  [(ngModel)]="account.country"
+                  required
+                  #country="ngModel"
+                >
+                </ng-select>
               </div>
               <!-- <div *ngIf="account.type === 'tutor'">
                 <p class="text-secondary" translate>
@@ -227,12 +251,12 @@
             <div class="mt-3">
               <h6 translate>I am a :</h6>
               <label class="custom-radio" translate
-                ><span translate>Student</span>
+                ><span translate>Customer</span>
                 <input type="radio" name="type" value="student" [(ngModel)]="account.type" />
                 <span class="checkmark"></span>
               </label>
               <label class="custom-radio"
-                ><span translate>Tutor</span>
+                ><span translate>Consultant</span>
                 <input type="radio" name="type" value="tutor" [(ngModel)]="account.type" />
                 <span class="checkmark"></span>
               </label>

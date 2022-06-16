@@ -10,7 +10,7 @@
         <table id="table_id" class="table table-horizontal tble-responsive">
           <tbody>
             <tr>
-              <td translate>Tutor name:</td>
+              <td translate>Consultant name:</td>
               <td>
                 <a
                   class="color-light-red"
@@ -22,7 +22,7 @@
               </td>
             </tr>
             <tr>
-              <td><span translate>Subjects / Group Class</span>:</td>
+              <td><span translate>Titles / Group Consultant</span>:</td>
               <td>
                 <span *ngIf="appointment.targetType === 'subject'"
                   >{{appointment.subject ? appointment.subject?.name : 'No name'}}</span

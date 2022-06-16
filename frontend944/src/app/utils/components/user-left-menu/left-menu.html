@@ -28,7 +28,7 @@
             *ngIf="type === 'tutor'"
           >
             <i class="far fa-list-alt mr-2"></i>
-            <span translate>My Categories</span>
+            <span translate>My Jobs</span>
           </a>
           <a [routerLink]="['/users/profile']" class="pn-ProductNav_Link" [routerLinkActive]="'active'">
             <i class="far fa-address-card mr-2"></i>
@@ -36,11 +36,15 @@
           </a>
           <a [routerLink]="['/users/favorites', 'tutor']" class="pn-ProductNav_Link" [routerLinkActive]="'active'">
             <i class="far fa-heart mr-2"></i>
-            <span translate>Favorite tutor</span>
+            <span translate>Favorite consultant</span>
           </a>
-          <a [routerLink]="['/users/favorites', 'webinar']" class="pn-ProductNav_Link" [routerLinkActive]="'active'">
+          <!-- <a [routerLink]="['/users/favorites', 'webinar']" class="pn-ProductNav_Link" [routerLinkActive]="'active'">
             <i class="far fa-heart mr-2"></i>
             <span translate>Favorite webinar</span>
+          </a> -->
+          <a [routerLink]="['/users/favorites', 'course']" class="pn-ProductNav_Link" [routerLinkActive]="'active'">
+            <i class="far fa-heart mr-2"></i>
+            <span translate>Favorite Job</span>
           </a>
           <a
             *ngIf="type === 'tutor'"
@@ -49,7 +53,7 @@
             class="pn-ProductNav_Link"
           >
             <i class="fas fa-desktop mr-2"></i>
-            <span translate>My Group Classes</span>
+            <span translate>My Group</span>
           </a>
           <a
             *ngIf="type === 'tutor'"
@@ -58,7 +62,7 @@
             class="pn-ProductNav_Link"
           >
             <i class="fas fa-book-reader mr-2"></i>
-            <span translate>My 1 on 1 Classes</span>
+            <span translate>My 1 on 1 Jobs</span>
           </a>
           <a [routerLink]="['/users/transaction/list']" [routerLinkActive]="'active'" class="pn-ProductNav_Link">
             <i class="fas fa-credit-card mr-2"></i>
@@ -66,7 +70,11 @@
           </a>
           <a [routerLink]="['/users/lessons']" [routerLinkActive]="'active'" class="pn-ProductNav_Link">
             <i class="fas fa-book mr-2"></i>
-            <span translate>My Lessons</span>
+            <span translate>My Tasks</span>
+          </a>
+          <a [routerLink]="['/users/my-course']" [routerLinkActive]="'active'" class="pn-ProductNav_Link">
+            <i class="fas fa-book mr-2"></i>
+            <span translate>My Jobs</span>
           </a>
           <a
             *ngIf="type === 'tutor'"

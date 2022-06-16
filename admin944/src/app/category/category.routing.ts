@@ -9,24 +9,24 @@ const routes: Routes = [
     path: 'list',
     component: CategoryListingComponent,
     data: {
-      title: 'Categorys manager',
-      urls: [{ title: 'Categorys', url: '/categories/list' }, { title: 'Listing' }]
+      title: 'Job-Skills Manager',
+      urls: [{ title: 'Job-Skill', url: '/categories/list' }, { title: 'Listing' }]
     }
   },
   {
     path: 'update/:id',
     component: CategoryUpdateComponent,
     data: {
-      title: 'Categorys Update',
-      urls: [{ title: 'Categorys', url: '/categories/list' }, { title: 'Update' }]
+      title: 'Job-Skill Update',
+      urls: [{ title: 'Job-Skill', url: '/categories/list' }, { title: 'Update' }]
     }
   },
   {
     path: 'create',
     component: CategoryCreateComponent,
     data: {
-      title: 'Create New Category',
-      urls: [{ title: 'Categorys', url: '/categories/list' }, { title: 'Create' }]
+      title: 'Create New Job-Skill',
+      urls: [{ title: 'Job-Skill', url: '/categories/list' }, { title: 'Create' }]
     }
   }
 ];

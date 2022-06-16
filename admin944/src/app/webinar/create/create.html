@@ -31,7 +31,7 @@
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label>Tutor</label>
+                  <label>Consultant</label>
                   <input
                     id="typeahead-template"
                     type="text"
@@ -41,7 +41,7 @@
                     [ngbTypeahead]="  search"
                     [resultTemplate]="rt"
                     [inputFormatter]="formatter"
-                    placeholder="Search tutor"
+                    placeholder="Search consultant"
                   />
                   <ng-template #rt let-r="result" let-t="term">
                     <ngb-highlight [result]="r.name" [term]="t">{{r?.name}}</ngb-highlight>
@@ -121,7 +121,7 @@
                     bindLabel="name"
                     [closeOnSelect]="true"
                     name="category"
-                    placeholder="Choose category"
+                    placeholder="Choose job-skill"
                     [(ngModel)]="webinar.categoryIds"
                     bindValue="originalCategoryId"
                     #categoryId="ngModel"
@@ -130,7 +130,7 @@
                   >
                   </ng-select>
                   <div *ngIf="categoryId.errors && (categoryId.dirty || categoryId.touched || isSubmitted)">
-                    <p [hidden]="!categoryId.errors.required" style="color: red" translate>Please choose category!</p>
+                    <p [hidden]="!categoryId.errors.required" style="color: red" translate>Please choose job-skill!</p>
                   </div>
                 </div>
               </div>
@@ -184,7 +184,7 @@
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label>Grades (*)</label>
+                  <label>Job-Types (*)</label>
                   <ng-select
                     [items]="grades"
                     multiple="true"
@@ -200,7 +200,7 @@
                   >
                   </ng-select>
                   <div *ngIf="gradeId.errors && (gradeId.dirty || gradeId.touched || isSubmitted)">
-                    <p [hidden]="!gradeId.errors.required" style="color: red" translate>Please choose Grades!</p>
+                    <p [hidden]="!gradeId.errors.required" style="color: red" translate>Please choose Job-Types!</p>
                   </div>
                 </div>
               </div>

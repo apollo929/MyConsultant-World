@@ -178,4 +178,11 @@ schema.virtual('tutor', {
   justOne: true
 });
 
+schema.virtual('course', {
+  ref: 'Course',
+  localField: 'targetId',
+  foreignField: '_id',
+  justOne: true
+});
+
 module.exports = schema;

@@ -141,7 +141,7 @@
                       >
                       </ng-select>
                       <div *ngIf="country.errors && (country.dirty || country.touched || isSubmitted)">
-                        <p [hidden]="!country.errors.required" style="color: red">Please select tutor country!</p>
+                        <p [hidden]="!country.errors.required" style="color: red">Please select consultant country!</p>
                       </div>
                     </div>
                   </div>
@@ -184,7 +184,7 @@
                         #address="ngModel"
                       />
                       <div *ngIf="address.errors && (address.dirty || address.touched || isSubmitted)">
-                        <p [hidden]="!address.errors.required" style="color: red">Please enter tutor address!</p>
+                        <p [hidden]="!address.errors.required" style="color: red">Please enter consultant address!</p>
                       </div>
                     </div>
                   </div>
@@ -204,7 +204,7 @@
                         pattern="[0-9A-Z]+"
                       />
                       <div *ngIf="zipcode.errors && (zipcode.dirty || zipcode.touched || isSubmitted)">
-                        <p [hidden]="!zipcode.errors.required" style="color: red">Please enter tutor zip code!</p>
+                        <p [hidden]="!zipcode.errors.required" style="color: red">Please enter consultant zip code!</p>
                         <p
                           *ngIf="zipcode?.errors.minlength || zipcode?.errors.maxlength"
                           class="error"
@@ -235,7 +235,7 @@
                       >
                       </ng-select>
                       <div *ngIf="language.errors && (language.dirty || language.touched || isSubmitted)">
-                        <p [hidden]="!language.errors.required" style="color: red">Please select tutor language!</p>
+                        <p [hidden]="!language.errors.required" style="color: red">Please select consultant language!</p>
                       </div>
                     </div>
                   </div>
@@ -441,7 +441,7 @@
                         style="margin-right: 3px"
                         *ngIf="!info.isZoomAccount && info._id"
                       >
-                        Invite tutors to join the zoom
+                        Invite consultants to join the zoom
                       </button>
                     </div>
                   </div>
@@ -470,7 +470,7 @@
                     </table>
                   </div> -->
                   <div class="col-md-12" *ngIf="info._id">
-                    <h4>Resume of tutor {{info?.name}}</h4>
+                    <h4>Resume of consultant {{info?.name}}</h4>
                     <ngb-tabset>
                       <ngb-tab title="Education">
                         <ng-template ngbTabContent>
@@ -644,7 +644,7 @@
                     </ngb-tabset>
                   </div>
                   <div class="col-md-12" *ngIf="info._id">
-                    <h4>Reviews of tutor {{info?.name}}</h4>
+                    <h4>Reviews of consultant {{info?.name}}</h4>
                     <app-review-tutor [tutorId]="tutorId"></app-review-tutor>
                   </div>
                 </div>
@@ -655,14 +655,14 @@
       </div>
     </ng-template>
   </ngb-tab>
-  <ngb-tab title="Tutor's categories" *ngIf="info._id">
+  <ngb-tab title="Consultant's Job-Skill" *ngIf="info._id">
     <ng-template ngbTabContent>
       <div class="row mt-2">
         <div class="col-md-4">
           <div class="card">
             <div class="card-body">
               <div class="header-my-category">
-                <h3>Categories</h3>
+                <h3>Job Skill</h3>
                 <button type="button" class="btn btn-danger" (click)="submitCategory()">
                   <i class="fa fa-plus font-sm"></i>
                 </button>
@@ -761,7 +761,7 @@
                   </tr>
 
                   <tr *ngIf="!selectedCategory">
-                    <td translate colspan="3">Please select category first!</td>
+                    <td translate colspan="3">Please select job-skill first!</td>
                   </tr>
 
                   <tr *ngIf="filterMySubject.loading">
@@ -840,7 +840,7 @@
                   </tr>
 
                   <tr *ngIf="!selectedSubject || !selectedCategory">
-                    <td translate colspan="4">Please select category and subject first!</td>
+                    <td translate colspan="4">Please select job-skill and subject first!</td>
                   </tr>
 
                   <tr *ngIf="filterMyTopic.loading">

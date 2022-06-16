@@ -1,6 +1,6 @@
 const bookingController = require('../controllers/booking.controller');
 
-module.exports = router => {
+module.exports = (router) => {
   /**
    * @apiGroup Booking
    * @apiVersion 1.0.0

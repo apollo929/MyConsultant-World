@@ -25,6 +25,18 @@ exports.model = {
         type: String,
         default: 'local'
       },
+      // countryCode: {
+      //   type: String,
+      //   default: ''
+      // },
+      // state: {
+      //   type: String,
+      //   default: ''
+      // },
+      // city: {
+      //   type: String,
+      //   default: ''
+      // },
       salt: String,
       facebook: {},
       twitter: {},

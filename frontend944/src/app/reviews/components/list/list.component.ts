@@ -51,7 +51,8 @@ export class ReviewListComponent implements OnInit {
         Object.assign({
           page: this.page,
           take: this.pageSize,
-          rateTo: this.options.rateTo || ''
+          rateTo: this.options.rateTo || '',
+          courseId: this.options.courseId,
         })
       )
       .then(res => {
@@ -90,7 +91,7 @@ export class ReviewListComponent implements OnInit {
           this.updateStatsOnUpdate(result);
         }
       },
-      () => {}
+      () => { }
     );
   }
 

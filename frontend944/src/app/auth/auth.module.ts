@@ -17,6 +17,7 @@ import { ForgotComponent } from './forgot/forgot.component';
 import { AuthRoutingModule } from './auth.routing';
 import { UtilsModule } from '../utils/utils.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { NgSelectModule } from '@ng-select/ng-select';
 @NgModule({
   imports: [
     CommonModule,
@@ -27,6 +28,7 @@ import { TranslateModule } from '@ngx-translate/core';
     NgbModule,
     MediaModule,
     UtilsModule,
+    NgSelectModule,
     TranslateModule.forChild(),
     QuillModule.forRoot()
   ],

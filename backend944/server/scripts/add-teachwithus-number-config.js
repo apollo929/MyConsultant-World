@@ -3,7 +3,7 @@ module.exports = async () =>
     {
       key: 'teachwithusStudents',
       value: '150',
-      name: 'Teach with us page - Number of students world wide',
+      name: 'Teach with us page - Number of customers world wide',
       description: '',
       public: true,
       ordering: 20

@@ -54,7 +54,7 @@ export class ListLessonComponent implements OnInit {
     private translate: TranslateService,
     private modalService: NgbModal
   ) {
-    seoService.update('My Lessons');
+    seoService.update('My Tasks');
     this.config = this.route.snapshot.data['appConfig'];
   }
 

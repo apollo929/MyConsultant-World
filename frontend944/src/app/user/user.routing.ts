@@ -15,8 +15,14 @@ import {
   ListLessonComponent,
   LessonDetailComponent,
   FavoriteComponent,
-  MyCategoriesComponent
+  MyCategoriesComponent,
+  CourseListingComponent,
+  CourseCreateComponent,
+  CourseUpdateComponent,
+  ListMyCourseComponent
 } from './component';
+
+
 import { StripeComponent } from './component/payment/stripe.component';
 
 const routes: Routes = [
@@ -55,6 +61,37 @@ const routes: Routes = [
       appConfig: ConfigResolver
     }
   },
+  ///////////////////////////
+
+  {
+    path: 'courses',
+    component: CourseListingComponent,
+    canActivate: [PaymentGuard],
+    resolve: {
+      appConfig: ConfigResolver
+    }
+  },
+  {
+    path: 'courses/create',
+    component: CourseCreateComponent,
+    canActivate: [PaymentGuard],
+    resolve: {
+      appConfig: ConfigResolver
+    }
+  },
+  {
+    path: 'courses/:id',
+    component: CourseUpdateComponent,
+    canActivate: [PaymentGuard],
+    resolve: {
+      appConfig: ConfigResolver
+    }
+  },
+
+
+
+
+  ///////////////////////////
   {
     path: 'appointments',
     component: ListScheduleComponent,
@@ -77,6 +114,13 @@ const routes: Routes = [
     path: 'schedule',
     component: ScheduleComponent,
     canActivate: [PaymentGuard],
+    resolve: {
+      appConfig: ConfigResolver
+    }
+  },
+  {
+    path: 'my-course',
+    component: ListMyCourseComponent,
     resolve: {
       appConfig: ConfigResolver
     }
@@ -113,4 +157,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class UserRoutingModule {}
+export class UserRoutingModule { }

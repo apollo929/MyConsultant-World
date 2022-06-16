@@ -5,7 +5,9 @@ import { DashboardLayoutComponent } from './layouts/dashboard/dashboard.componen
 
 import { AuthGuard } from './shared/guard/auth.guard';
 import { ConfigResolver, LanguageResolver, SubjectsResolver, PostsResolver, CategoryResolver } from './shared/resolver';
-import { applySourceSpanToStatementIfNeeded } from '@angular/compiler/src/output/output_ast';
+// import { applySourceSpanToStatementIfNeeded } from '@angular/compiler/src/output/output_ast';
+// import { WebinarListingComponent } from './safety/list.component';
+
 
 export const Approutes: Routes = [
   {
@@ -45,6 +47,13 @@ export const Approutes: Routes = [
       {
         path: 'webinars',
         loadChildren: () => import('./webinar/webinar.module').then(m => m.WebinarModule),
+        resolve: {
+          appConfig: ConfigResolver
+        }
+      },
+      {
+        path: 'courses',
+        loadChildren: () => import('./course/course.module').then(m => m.CourseModule),
         resolve: {
           appConfig: ConfigResolver
         }
@@ -119,6 +128,14 @@ export const Approutes: Routes = [
     resolve: { appConfig: ConfigResolver, language: LanguageResolver },
     children: [{ path: '', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) }]
   },
+  {
+    path: 'safety',
+    component: BlankComponent,
+    resolve: { appConfig: ConfigResolver, language: LanguageResolver },
+    children: [{ path: '', loadChildren: () => import('./safety/safety.module').then(m => m.SafetyModule) }]
+  },
+
+ 
   {
     path: '**',
     redirectTo: '/'

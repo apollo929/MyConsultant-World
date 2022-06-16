@@ -1,6 +1,10 @@
 const Joi = require('joi');
 
 exports.register = async (req, res, next) => {
+  // let countryCode = '';
+  // if (validate.value.country) {
+  //   countryCode = validate.value.country.code || '';
+  // }
   try {
     const schema = Joi.object().keys({
       email: Joi.string().email().required(),
@@ -13,7 +17,9 @@ exports.register = async (req, res, next) => {
       // certificationDocument: Joi.string().required(),
       timezone: Joi.string().allow(['', null]).optional(),
       introVideoId: Joi.string().allow(['', null]).optional(),
-      introYoutubeId: Joi.string().allow(['', null]).optional()
+      introYoutubeId: Joi.string().allow(['', null]).optional(),
+      country: Joi.object().allow(null).optional(),
+      avatar: Joi.string().allow(['', null]).optional(),
     });
     // if (!req.file) {
     //   return next(
@@ -32,6 +38,7 @@ exports.register = async (req, res, next) => {
     }
 
     // validate.value.issueDocumentFile = req.file;
+    console.log(validate.value);
     await Service.Tutor.register(validate.value);
 
     res.locals.register = PopulateResponse.success(
@@ -86,6 +93,31 @@ exports.uploadIntroVideo = async (req, res, next) => {
 
     const file = await Service.Media.createVideoWithoutOwner({
       value: { systemType: 'video' },
+      file: req.file
+    });
+
+    res.locals.upload = file;
+    return next();
+  } catch (e) {
+    return next(e);
+  }
+};
+
+exports.uploadIntroImage = async (req, res, next) => {
+  try {
+    if (!req.file) {
+      return next(
+        PopulateResponse.error(
+          {
+            message: 'Missing image'
+          },
+          'ERR_MISSING_FILE'
+        )
+      );
+    }
+
+    const file = await Service.Media.createImageWithoutOwner({
+      value: { systemType: 'image' },
       file: req.file
     });
 

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-exports.User = schema => {
+exports.User = (schema) => {
   schema.add({
     username: {
       type: String,

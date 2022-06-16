@@ -5,11 +5,11 @@
     <table class="table table-horizontal tble-responsive" *ngIf="item">
       <tbody>
         <tr>
-          <td translate>Tutor name:</td>
+          <td translate>Consultant name:</td>
           <td>{{item?.tutor?.name}}</td>
         </tr>
         <tr>
-          <td translate>Tutor email:</td>
+          <td translate>Consultant email:</td>
           <td>{{item?.tutor?.email}}</td>
         </tr>
         <tr>
@@ -21,7 +21,7 @@
           <td>{{item?.total}} %</td>
         </tr>
         <tr class="table-primary">
-          <td><h3>Tutor earnings</h3></td>
+          <td><h3>Consultant earnings</h3></td>
           <td>
             <h3>
               {{item.tutorEarnings | currency : (config?.currencySymbol ? config?.currencySymbol : '$'): 'symbol' :

@@ -9,24 +9,24 @@ const routes: Routes = [
     path: 'list',
     component: GradeListingComponent,
     data: {
-      title: 'Grades manager',
-      urls: [{ title: 'Grades', url: '/grades/list' }, { title: 'Listing' }]
+      title: 'Job-Type Manager',
+      urls: [{ title: 'Job-Type', url: '/grades/list' }, { title: 'Listing' }]
     }
   },
   {
     path: 'update/:id',
     component: GradeUpdateComponent,
     data: {
-      title: 'Grades Update',
-      urls: [{ title: 'Grades', url: '/grades/list' }, { title: 'Update' }]
+      title: 'Job-Type Update',
+      urls: [{ title: 'Job-Type', url: '/grades/list' }, { title: 'Update' }]
     }
   },
   {
     path: 'create',
     component: GradeCreateComponent,
     data: {
-      title: 'Create New Grade',
-      urls: [{ title: 'Grades', url: '/grades/list' }, { title: 'Create' }]
+      title: 'Create New Job-Type',
+      urls: [{ title: 'Job-Type', url: '/grades/list' }, { title: 'Create' }]
     }
   }
 ];

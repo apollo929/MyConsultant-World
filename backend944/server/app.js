@@ -40,6 +40,7 @@ kernel.loadModule(require('./module/stats'));
 kernel.loadModule(require('./module/zoomus'));
 kernel.loadModule(require('./module/meeting'));
 kernel.loadModule(require('./module/webinar'));
+kernel.loadModule(require('./module/course'));
 
 // NOTE - compose at last
 kernel.compose();

@@ -7,29 +7,29 @@
           *ngIf="category && category.length && category[0].name"
           translate
         >
-          Enjoy <span>{{category && category.length && category[0].name}}</span> lessons with professional, engaging
-          &amp; motivating online <span>{{category && category.length && category[0].name}}</span> tutors
+          Hire <span>{{category && category.length && category[0].name}}</span> professsional consultant
+          <!-- &amp; motivating online <span>{{category && category.length && category[0].name}}</span> consultants -->
         </h2>
         <h2
           class="color-light-black max-width-900 mx-auto"
           *ngIf="!category || !category.length || !category[0].name"
           translate
         >
-          Enjoy lessons with a professional, engaging &amp; motivating online tutor
+          Enjoy tasks with a professional, engaging &amp; motivating online consultants
         </h2>
       </div>
     </div>
 
     <div class="col-md-12 d-flex justify-content-center rd-block">
       <div class="form-group mr-3">
-        <label class="font-weight-bold font-sm" translate>Filter By Categories</label>
+        <label class="font-weight-bold font-sm" translate>Filter By Job skills</label>
         <select class="custom-select" [(ngModel)]="searchFields.categoryIds" (change)="selectCategory()">
           <option selected translate value="">None</option>
           <option *ngFor="let cate of categories" value="{{cate._id}}">{{cate.name}}</option>
         </select>
       </div>
       <div class="form-group mr-3">
-        <label class="font-weight-bold font-sm" translate>Filter By Subjects</label>
+        <label class="font-weight-bold font-sm" translate>Filter By Job Titles</label>
         <select class="custom-select" [(ngModel)]="searchFields.subjectIds" (change)="selectSubject()">
           <option selected translate value="">None</option>
           <option *ngFor="let sub of subjects" value="{{sub._id}}">{{sub.name}}</option>
@@ -49,7 +49,7 @@
         <div class="col-md-6">
           <div class="row">
             <div class="col-md-6 d-flex justify-content-end align-items-center filter-label">
-              <label class="mb-0 font-weight-bold font-md" translate>Filter Tutors By</label>
+              <label class="mb-0 font-weight-bold font-md" translate>Filter Consultants By</label>
             </div>
             <div class="col-md-6">
               <select class="custom-select" [(ngModel)]="searchFields.subjectId" (change)="subjectChange()">

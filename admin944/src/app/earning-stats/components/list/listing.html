@@ -10,7 +10,7 @@
           [ngbTypeahead]="search"
           [resultTemplate]="rt"
           [inputFormatter]="formatter"
-          placeholder="Search tutor"
+          placeholder="Search consultant"
         />
         <ng-template #rt let-r="result" let-t="term">
           <ngb-highlight [result]="r.name" [term]="t">{{r?.name}}</ngb-highlight>
@@ -35,7 +35,7 @@
       <thead>
         <tr>
           <th>
-            <a (click)="sortBy('tutorId', 'desc')">Tutor name</a>
+            <a (click)="sortBy('tutorId', 'desc')">Consultant name</a>
             <span *ngIf="sortOption.sortBy=='tutorId'">
               <a (click)="sortBy('tutorId', 'asc')" *ngIf="sortOption.sortType=='desc'"
                 ><i class="fa fa-caret-down"></i

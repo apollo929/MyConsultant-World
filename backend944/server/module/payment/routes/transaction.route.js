@@ -1,6 +1,6 @@
 const transactionController = require('../controllers/transaction.controller');
 
-module.exports = router => {
+module.exports = (router) => {
   /**
    * @apiGroup Transaction
    * @apiVersion 1.0.0
@@ -76,4 +76,6 @@ module.exports = router => {
     transactionController.transactionOfTutor,
     Middleware.Response.success('listOfTutor')
   );
+
+  router.get('/v1/my-course', Middleware.isAuthenticated, transactionController.myCourse, Middleware.Response.success('list'));
 };

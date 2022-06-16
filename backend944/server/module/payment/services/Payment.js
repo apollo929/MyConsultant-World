@@ -1,6 +1,7 @@
 const url = require('url');
 const enrollQ = require('../../webinar/queue');
-exports.getRedirect = async options => {
+
+exports.getRedirect = async (options) => {
   try {
     const transaction = new DB.Transaction({
       webinarId: options.webinarId
@@ -32,7 +33,7 @@ exports.getRedirect = async options => {
   }
 };
 
-exports.createPaymentIntentByStripe = async options => {
+exports.createPaymentIntentByStripe = async (options) => {
   try {
     // let price = options.price;
     let priceForPayment = options.price;
@@ -121,7 +122,7 @@ exports.createPaymentIntentByStripe = async options => {
           if (applicationFee > 100) {
             applicationFee = 100;
           }
-          applicationFee = applicationFee / 100;
+          applicationFee /= 100;
         }
         transaction.applicationFee = transaction.price * applicationFee;
       }
@@ -138,9 +139,7 @@ exports.createPaymentIntentByStripe = async options => {
       await transaction.save();
       return this.updatePayment(transaction);
     }
-    const paymentData = await Service.Stripe.createPaymentIntent(
-      Object.assign(transaction, { description: options.description, priceForPayment, applicationFee: transaction.price * applicationFee })
-    );
+    const paymentData = await Service.Stripe.createPaymentIntent(Object.assign(transaction, { description: options.description, priceForPayment, applicationFee: transaction.price * applicationFee }));
     transaction.stripeClientSecret = paymentData && paymentData.client_secret ? paymentData.client_secret : '';
     await transaction.save();
     return transaction;
@@ -149,7 +148,7 @@ exports.createPaymentIntentByStripe = async options => {
   }
 };
 
-exports.updatePayment = async transactionId => {
+exports.updatePayment = async (transactionId) => {
   try {
     const transaction = transactionId instanceof DB.Transaction ? transactionId : await DB.Transaction.findOne({ _id: transactionId });
     if (!transaction) {
@@ -172,7 +171,7 @@ exports.updatePayment = async transactionId => {
       };
     }
     transaction.status = checking.status;
-    transaction.paid = checking.status === 'completed' ? true : false;
+    transaction.paid = checking.status === 'completed';
     await transaction.save();
     // update booking info
     if (transaction.status === 'completed') {
@@ -189,7 +188,7 @@ exports.updatePayment = async transactionId => {
         if (commissionRate > 100) {
           commissionRate = 100;
         }
-        commissionRate = commissionRate / 100;
+        commissionRate /= 100;
       }
       const price = transaction.price;
       const commission = price * (tutor.commissionRate ? tutor.commissionRate : commissionRate);
@@ -208,7 +207,7 @@ exports.updatePayment = async transactionId => {
 
       if (transaction.targetType === 'subject') {
         const appointment = await DB.Appointment.findOne({ transactionId: transaction._id });
-        appointment.paid = checking.status === 'completed' ? true : false;
+        appointment.paid = checking.status === 'completed';
         await appointment.save();
         await enrollQ.createAppointmentSolo(appointment._id);
       }
@@ -232,15 +231,16 @@ exports.updatePayment = async transactionId => {
           }
         );
 
-        if (tutor.notificationSettings)
+        if (tutor.notificationSettings) {
           await Service.Mailer.send('appointment/notify-tutor-new-booking.html', tutor.email, {
-            subject: `New user booking with you!`,
+            subject: 'New user booking with you!',
             user: user.getPublicProfile(),
             tutor: tutor.getPublicProfile(),
             transaction: transaction.toObject(),
             webinar: webinar.toObject(),
             currencySymbol: currencySymbol ? currencySymbol.value : '$'
           });
+        }
       } else if (transaction.targetType === 'course' && course && transaction.type === 'booking') {
         // const course = await DB.Course.findOne({ _id: transaction.courseId });
         const myCourse = new DB.MyCourse({
@@ -255,7 +255,7 @@ exports.updatePayment = async transactionId => {
       }
 
       if (user && tutor) {
-        if (user.notificationSettings)
+        if (user.notificationSettings) {
           await Service.Mailer.send('payment/book-appointment-success.html', user.email, {
             subject: `Payment successfully made for the reservation #${transaction.code}`,
             user: user.getPublicProfile(),
@@ -263,6 +263,7 @@ exports.updatePayment = async transactionId => {
             transaction: transaction.toObject(),
             currencySymbol: currencySymbol ? currencySymbol.value : '$'
           });
+        }
         if (transaction.type === 'gift') {
           await Service.Mailer.send('appointment/send-gift.html', transaction.emailRecipient, {
             subject: `${user.name} gave you a gift`,
@@ -289,3 +290,20 @@ exports.updatePayment = async transactionId => {
     throw e;
   }
 };
+
+exports.isBooked = async (items, userId) => (items.length
+  ? await Promise.all(items.map(async (item) => {
+    if (item.course) {
+      item = item.toObject();
+      item.course.isFavorite = true;
+      item.course.booked = true;
+      const progress = await DB.Progress.findOne({ userId: item.userId, courseId: item.course._id });
+      if (progress) {
+        item.course.progress = progress.progressValue;
+      } else {
+        item.course.progress = 0;
+      }
+      return item.course;
+    }
+  }))
+  : []);

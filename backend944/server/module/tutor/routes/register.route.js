@@ -49,6 +49,25 @@ const uploadVideo = multer({
   })
 });
 
+const uploadAvatar = multer({
+  storage: multer.diskStorage({
+    destination(req, file, cb) {
+      cb(null, config.avatarDir);
+    },
+    filename(req, file, cb) {
+      const ext = Helper.String.getExt(file.originalname);
+      const nameWithoutExt = Helper.String.createAlias(Helper.String.getFileName(file.originalname, true));
+      let fileName = `${nameWithoutExt}${ext}`;
+      if (fs.existsSync(path.resolve(config.avatarDir, fileName))) {
+        fileName = `${nameWithoutExt}-${Helper.String.randomString(5)}${ext}`;
+      }
+
+      cb(null, fileName);
+    },
+    fileSize: (process.env.MAX_VIDEO_SIZE || 10) * 1024 * 1024 // 10MB limit
+  })
+});
+
 module.exports = router => {
   /**
    * @apiGroup Tutor
@@ -81,6 +100,8 @@ module.exports = router => {
   router.post('/v1/tutors/upload-document', uploadDocument.single('file'), registerController.uploadDocument, Middleware.Response.success('upload'));
 
   router.post('/v1/tutors/upload-introVideo', uploadVideo.single('file'), registerController.uploadIntroVideo, Middleware.Response.success('upload'));
+  
+  router.post('/v1/tutors/upload-introImage', uploadAvatar.single('file'), registerController.uploadIntroImage, Middleware.Response.success('upload'));
   /**
    * @apiGroup Tutor
    * @apiVersion 1.0.0

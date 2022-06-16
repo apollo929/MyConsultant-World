@@ -191,3 +191,30 @@ exports.createVideoWithoutOwner = async options => {
     throw e;
   }
 };
+
+exports.createImageWithoutOwner = async options => {
+  try {
+    const file = options.file;
+    const value = options.value;
+    const image = new DB.Media({
+      type: 'image',
+      systemType: value.systemType,
+      name: value.name || file.filename,
+      mimeType: file.mimetype,
+      description: value.description,
+      categoryIds: value.categoryIds,
+      filePath: file.path,
+      originalPath: file.path,
+      convertStatus: 'processing',
+      uploaded: process.env.USE_S3 !== 'true'
+    });
+    await image.save();
+
+    // TODO - define me here
+    // await Q.convertVideo(video);
+
+    return image;
+  } catch (e) {
+    throw e;
+  }
+};

@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FileUploader, FileItem, FileLikeObject } from 'ng2-file-upload';
 import { AuthService } from '../../shared/services';
 import { MediaService } from '../service';
@@ -10,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
   selector: 'app-file-upload',
   templateUrl: './upload.html'
 })
-export class FileUploadComponent implements OnInit {
+export class FileUploadComponent implements OnInit, OnChanges {
   /**
    * option format
    * {
@@ -19,6 +19,7 @@ export class FileUploadComponent implements OnInit {
    * }
    */
   @Input() options: any;
+  @Input() disable: boolean;
   public hasBaseDropZoneOver: Boolean = false;
   public uploader: FileUploader;
   public multiple: Boolean = false;
@@ -26,13 +27,17 @@ export class FileUploadComponent implements OnInit {
   public autoUpload: Boolean = false;
   public progress: any = 0;
   private uploadedItems: any = [];
+  private uploadedItemsAlternative: any = [];
 
   constructor(
     private authService: AuthService,
     private mediaService: MediaService,
     private toasty: ToastrService,
     private translate: TranslateService
-  ) {}
+  ) { }
+
+  ngOnChanges(changes: SimpleChanges): void {
+  }
 
   ngOnInit() {
     // TODO - upload default file url and custom field here
@@ -80,10 +85,10 @@ export class FileUploadComponent implements OnInit {
 
     this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
       this.uploader.removeFromQueue(item);
-
       // TODO - handle error event too
       const resp = JSON.parse(response);
       this.uploadedItems.push(resp);
+      this.uploadedItemsAlternative.push([resp, item])
       if (this.options.onCompleteItem) {
         this.options.onCompleteItem(resp);
       }
@@ -110,7 +115,13 @@ export class FileUploadComponent implements OnInit {
         return this.toasty.error(this.translate.instant('File size is larger than maximum size!'));
       }
       if (this.options.accept) {
-        const accept = this.accept(file.type, this.options.accept);
+
+        let accept = this.accept(file.type, this.options.accept);
+
+        if (this.options.accept.includes('.') && this.options.accept.includes(file.name.split('.')[file.name.split('.').length - 1])) {
+          accept = true
+        }
+
         if (!accept) {
           return this.toasty.error(this.translate.instant('Invalid file type'));
         }
@@ -135,7 +146,10 @@ export class FileUploadComponent implements OnInit {
         return this.toasty.error(this.translate.instant('File size is larger than maximum size!'));
       }
       if (this.options.accept) {
-        const accept = this.accept(file.type, this.options.accept);
+        let accept = this.accept(file.type, this.options.accept);
+        if (this.options.accept.includes('.') && this.options.accept.includes(file.name.split('.')[file.name.split('.').length - 1])) {
+          accept = true
+        }
         if (!accept) {
           return this.toasty.error(this.translate.instant('Invalid file type'));
         }
@@ -167,6 +181,10 @@ export class FileUploadComponent implements OnInit {
       this.uploader.clearQueue();
       if (this.options.onFinish) {
         this.options.onFinish(this.options.multiple ? this.uploadedItems : this.uploadedItems[0]);
+      }
+
+      if (this.options.onFinishAlternative) {
+        this.options.onFinishAlternative(this.options.multiple ? { data: this.uploadedItemsAlternative, } : this.uploadedItemsAlternative[0]);
       }
 
       // reset because Queue reset too

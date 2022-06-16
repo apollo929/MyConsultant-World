@@ -3,7 +3,7 @@ import { RestangularModule, Restangular } from 'ngx-restangular';
 
 @Injectable()
 export class CouponService {
-  constructor(private restangular: Restangular) {}
+  constructor(private restangular: Restangular) { }
 
   create(params: any): Promise<any> {
     return this.restangular.all('coupons').post(params).toPromise();

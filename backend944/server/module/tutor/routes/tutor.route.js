@@ -1,6 +1,6 @@
 const tutorController = require('../controllers/tutor.controller');
 
-module.exports = router => {
+module.exports = (router) => {
   /**
    * @apiDefine tutorRequest
    * @apiParam {String}   name

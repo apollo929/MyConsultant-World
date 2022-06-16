@@ -36,7 +36,7 @@ export class SubjectComponent implements OnInit {
     private subjectService: SubjectService,
     private translate: TranslateService
   ) {
-    this.seoService.update('Enjoy lessons with a professional online tutors');
+    this.seoService.update('Enjoy task with a professional online tutors');
     this.categories = this.route.snapshot.data['categories'];
     this.route.queryParams.subscribe(params => {
       this.category = this.categories.filter(item => item.alias === params.category);

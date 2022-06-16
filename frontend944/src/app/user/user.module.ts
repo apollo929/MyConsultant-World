@@ -30,7 +30,11 @@ import {
   MyCategoryFormComponent,
   MySubjectFormComponent,
   MyTopicFormComponent,
-  ModalAppointment
+  ModalAppointment,
+  CourseCreateComponent,
+  CourseUpdateComponent,
+  CourseListingComponent,
+  ListMyCourseComponent
 } from './component';
 import {
   WebinarService,
@@ -62,6 +66,11 @@ import { ShareButtonModule } from 'ngx-sharebuttons/button';
 import { StripeServiceAccount } from './services/stripe.service';
 import { StripeComponent } from './component/payment/stripe.component';
 import { PaymentGuard } from '../shared/guard/payment.guard';
+import { CourseService } from 'app/shared/services/course.service';
+import { CourseModule } from 'app/course/course.module';
+import { ModalLectureSection } from './component/course/modal-lecture-section/modal-lecture-section';
+import { ModalLecture } from './component/course/modal-lecture/modal-lecture';
+import { LectureService } from 'app/shared/services/lecture.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -73,12 +82,14 @@ import { PaymentGuard } from '../shared/guard/payment.guard';
     UtilsModule,
     NgSelectModule,
     CalendarModule,
+    ShareButtonModule,
     ReviewModule,
     TooltipModule.forRoot(),
     CKEditorModule,
     TranslateModule.forChild(),
     TutorModule,
     WebinarModule,
+    CourseModule,
     NgxExtendedPdfViewerModule,
     QuillModule.forRoot(),
   ],
@@ -89,9 +100,13 @@ import { PaymentGuard } from '../shared/guard/payment.guard';
     WebinarCreateComponent,
     WebinarUpdateComponent,
     WebinarListingComponent,
+    CourseCreateComponent,
+    CourseUpdateComponent,
+    CourseListingComponent,
     ListScheduleComponent,
     ScheduleDetailComponent,
     ScheduleComponent,
+    ListMyCourseComponent,
     ListLessonComponent,
     LessonDetailComponent,
     FavoriteComponent,
@@ -101,7 +116,9 @@ import { PaymentGuard } from '../shared/guard/payment.guard';
     MyCategoryFormComponent,
     MyTopicFormComponent,
     ModalAppointment,
-    StripeComponent
+    StripeComponent,
+    ModalLectureSection,
+    ModalLecture
   ],
   providers: [
     UserService,
@@ -119,6 +136,7 @@ import { PaymentGuard } from '../shared/guard/payment.guard';
     TransactionService,
     ConfigResolver,
     CountryService,
+    CourseService,
     GradeService,
     MySubjectService,
     MyCategoryService,
@@ -127,9 +145,10 @@ import { PaymentGuard } from '../shared/guard/payment.guard';
     TopicService,
     SubjectService,
     StripeServiceAccount,
-    PaymentGuard
+    PaymentGuard,
+    LectureService
   ],
   exports: [],
   entryComponents: [ParticipantFormComponent]
 })
-export class UserModule {}
+export class UserModule { }

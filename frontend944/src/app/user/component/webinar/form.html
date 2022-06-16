@@ -3,7 +3,7 @@
     <div class="row mb-4">
       <div class="col-md-12 col-lg-12 col-sm-12">
         <h4 class="color-light-black mb-3" *ngIf="webinar._id">
-          <span translate>Update group class</span> {{webinar?.name}}
+          <span translate>Update Consultant Group</span> {{webinar?.name}}
         </h4>
         <div class="col-md-12" *ngIf="webinar._id">
           <div class="wizard">
@@ -38,7 +38,7 @@
         </div>
       </div>
       <div>
-        <h4 class="color-light-black" *ngIf="!webinar._id" translate>Create new group class</h4>
+        <h4 class="color-light-black" *ngIf="!webinar._id" translate>Create new Consultant Group</h4>
       </div>
     </div>
     <div class="tab-content" id="main_form">
@@ -60,7 +60,7 @@
             <div class="row mb-3">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label translate>Group Class Title (*)</label>
+                  <label translate>Consultant Group Title (*)</label>
                   <input
                     type="text"
                     class="form-control"
@@ -73,7 +73,7 @@
                   />
                 </div>
                 <div *ngIf="name.errors && (name.dirty || name.touched || isSubmitted)">
-                  <p [hidden]="!name.errors.required" style="color: red" translate>Please enter group class name!</p>
+                  <p [hidden]="!name.errors.required" style="color: red" translate>Please enter Consultant Group name!</p>
                 </div>
               </div>
               <div class="col-md-6">
@@ -113,7 +113,7 @@
 
               <div class="col-md-6">
                 <div class="form-group">
-                  <label translate>Categories (*)</label>
+                  <label translate>Skills (*)</label>
                   <ng-select
                     [items]="myCategories"
                     multiple="true"
@@ -136,7 +136,7 @@
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label>Subjects (*)</label>
+                  <label>Titles (*)</label>
                   <ng-select
                     [items]="mySubjects"
                     multiple="true"
@@ -144,7 +144,7 @@
                     bindLabel="name"
                     [closeOnSelect]="true"
                     name="subject"
-                    placeholder="Choose subjects"
+                    placeholder="Choose titles"
                     [(ngModel)]="webinar.subjectIds"
                     bindValue="originalSubjectId"
                     #subjectId="ngModel"
@@ -272,12 +272,13 @@
             </div>
             <div class="row mt-5 mb-5">
               <div class="col-md-12">
-                <h5 class="color-light-black" translate>Update slot for group class</h5>
+                <h5 class="color-light-black" translate>Update slot for Consultant Group</h5>
                 <app-schedule-calendar
                   [type]="'webinar'"
                   [webinarName]="webinar.name || null"
                   [webinarId]="webinarId"
                   [hashWebinar]="hashWebinar"
+                  [isFree] = "webinar.isFree"
                 >
                 </app-schedule-calendar>
               </div>

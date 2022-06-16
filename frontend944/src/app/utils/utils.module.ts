@@ -32,6 +32,11 @@ import {
   TextEllipsisComponent
 } from './components';
 import { CardTextComponent } from './components/card-text.component';
+import { CourseCouponComponent } from './components/course-coupon/coupon-form/coupon.component';
+import { CourseGoalComponent } from './components/course-goals/course-goal-form/course-goal.component';
+import { GoalService } from 'app/shared/services/goal.service';
+import { LectureDetailsComponent } from './components/lecture-details/lecture-details/lecture-details.component';
+import { LectureSectionService } from 'app/shared/services/lecture-section.service';
 @NgModule({
   imports: [
     FormsModule,
@@ -62,6 +67,9 @@ import { CardTextComponent } from './components/card-text.component';
     TableComponent,
     CouponComponent,
     ApplyCouponComponent,
+    CourseCouponComponent,
+    CourseGoalComponent,
+    LectureDetailsComponent,
     CardTextComponent,
     TextEllipsisComponent,
     DSTFormatPipe
@@ -86,9 +94,12 @@ import { CardTextComponent } from './components/card-text.component';
     TimezoneComponent,
     TableComponent,
     CouponComponent,
+    CourseCouponComponent,
+    CourseGoalComponent,
     ApplyCouponComponent,
     CardTextComponent,
     TextEllipsisComponent,
+    LectureDetailsComponent,
     DSTFormatPipe
   ],
   providers: [
@@ -99,8 +110,10 @@ import { CardTextComponent } from './components/card-text.component';
     SubjectsResolver,
     PostsResolver,
     CouponService,
-    DTSService
+    GoalService,
+    DTSService,
+    LectureSectionService
   ],
   entryComponents: [ModalSignupComponent]
 })
-export class UtilsModule {}
+export class UtilsModule { }

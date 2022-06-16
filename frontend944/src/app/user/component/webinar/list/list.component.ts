@@ -40,7 +40,7 @@ export class WebinarListingComponent implements OnInit {
     private modalService: NgbModal,
     private translate: TranslateService
   ) {
-    seoService.update('My Group Classes');
+    seoService.update('My Group Consultants');
     this.config = this.route.snapshot.data['appConfig'];
   }
 

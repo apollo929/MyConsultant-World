@@ -1,9 +1,9 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ToastrService } from 'ngx-toastr';
+// import { ToastrService } from 'ngx-toastr';
 import * as _ from 'lodash';
-import { TutorService } from '../../../tutor/services/tutor.service';
-import { UserService } from '../../../user/services/user.service';
+// import { TutorService } from '../../../tutor/services/tutor.service';
+// import { UserService } from '../../../user/services/user.service';
 
 @Component({
   selector: 'app-upload-avatar',
@@ -16,10 +16,10 @@ export class AvatarUploadComponent implements OnInit {
   public avatarUrl: any = '';
   public imageSelected: any[] = [];
   constructor(
-    private toasty: ToastrService,
+    // private toasty: ToastrService,
     public activeModal: NgbActiveModal,
-    private tutorService: TutorService,
-    private userService: UserService
+    // private tutorService: TutorService,
+    // private userService: UserService
   ) {
     this.maxFileSize = window.appConfig.maximumFileSize;
   }

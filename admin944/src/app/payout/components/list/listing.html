@@ -14,7 +14,7 @@
           [ngbTypeahead]="search"
           [resultTemplate]="rt"
           [inputFormatter]="formatter"
-          placeholder="Search tutor"
+          placeholder="Search consultant"
         />
         <ng-template #rt let-r="result" let-t="term">
           <ngb-highlight [result]="r.name" [term]="t">{{r?.name}}</ngb-highlight>
@@ -88,7 +88,7 @@
           [ngbTypeahead]="search"
           [resultTemplate]="rt"
           [inputFormatter]="formatter"
-          placeholder="Search tutor"
+          placeholder="Search consultant"
         />
         <ng-template #rt let-r="result" let-t="term">
           <ngb-highlight [result]="r.name" [term]="t">{{r?.name}}</ngb-highlight>

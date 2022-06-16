@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-between align-items-center">
   <h4 translate>
-    <span *ngIf="type==='tutor'" translate>Tutor's Rating</span>
-    <span *ngIf="type!=='tutor'" translate>Student's Rating</span> &amp; <span translate>Review</span>
+    <span *ngIf="type==='tutor'" translate>Consultant's Rating</span>
+    <span *ngIf="type!=='tutor'" translate>Customer's Rating</span> &amp; <span translate>Review</span>
   </h4>
   <a translate class="review-text color-blue" (click)="writeReview=!writeReview" [hidden]="!canWriteReview"
     >Write Review</a

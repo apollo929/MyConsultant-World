@@ -15,6 +15,7 @@ export class ConfirmModalComponent implements OnInit {
   @Input() price: number = 0;
   @Input() config: any;
   @Input() appliedCoupon: boolean = false;
+  @Input() timeSelList: any;
   constructor(public activeModal: NgbActiveModal, private toasty: ToastrService, private route: ActivatedRoute) {}
 
   ngOnInit() {}

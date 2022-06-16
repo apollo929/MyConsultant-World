@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-4">
         <div class="header-my-category">
-          <h4 translate>Categories</h4>
+          <h4 translate>Skills</h4>
           <button type="button" class="btn btn-sm btn-danger" (click)="submitCategory()">
             <i class="fa fa-plus font-sm"></i>
           </button>
@@ -57,7 +57,7 @@
                 </thead>
                 <tbody>
                   <tr *ngIf="!myCategories.length && !filterMyCategory.loading">
-                    <td translate colspan="4">There are no categories</td>
+                    <td translate colspan="4">There are no skills</td>
                   </tr>
 
                   <tr *ngIf="filterMyCategory.loading">
@@ -85,7 +85,7 @@
                         (click)="selectMyCategory(item)"
                         class="btn btn-light-primary btn-sm btn-icon-padding"
                       >
-                        <strong translate>List Subjects</strong>
+                        <strong translate>Title List</strong>
                       </a>
                     </td>
                   </tr>
@@ -175,11 +175,11 @@
                 </thead>
                 <tbody>
                   <tr *ngIf="!mySubjects.length && !filterMySubject.loading && selectedCategory">
-                    <td translate colspan="4">There are no subjects</td>
+                    <td translate colspan="4">There are no title</td>
                   </tr>
 
                   <tr *ngIf="!selectedCategory">
-                    <td translate colspan="4">Please select category first!</td>
+                    <td translate colspan="4">Please select title first!</td>
                   </tr>
 
                   <tr *ngIf="filterMySubject.loading">
@@ -312,7 +312,7 @@
                   </tr>
 
                   <tr *ngIf="!selectedCategory || !selectedSubject">
-                    <td translate colspan="4">Please select category and subject first!</td>
+                    <td translate colspan="4">Please select skills and title first!</td>
                   </tr>
 
                   <tr *ngIf="filterMyTopic.loading">

@@ -159,6 +159,21 @@ p.error {
   display: none;
   color: #e1245a;
 }
+.box-image-signup {
+  padding-left: auto;
+  padding-right: auto;
+  width: 250px;
+  position: relative;
+  display: block;
+  &:hover {
+    .btn-upload-avatar {
+      display: block !important;
+    }
+    .btn-delete-avatar {
+      display: block !important;
+    }
+  }
+}
 
 .dashboard-profile > .box-image {
   width: 150px;

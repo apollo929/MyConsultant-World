@@ -61,7 +61,7 @@
                     <!-- <a class="btn btn-blue" href="#">
                     <i class="far fa-envelope color-white mr-2"></i>
                     <span translate>Send a Message</span>
-                    
+
                   </a> -->
                     <send-message-btn [recipientId]="tutor._id"></send-message-btn>
                     <a class="btn btn-white ml-2" *ngIf="!tutor.isFavorite" (click)="favorite()">
@@ -106,23 +106,23 @@
                   </a>
                   <a class="btn btn-blue rmr-2 scrollTo" id="btn-view-webinars">
                     <img src="../assets/images/webinar.svg" alt="view webinars" class="img-sm mt-n1 mr-1" translate />
-                    <span translate>View Group Classes</span>
+                    <span translate>View Group Consultants</span>
                   </a>
                 </div>
-                <h5 class="rmt-4 mt-3" translate *ngIf="tutor.gradeItems.length">Grades which they take classes for</h5>
+                <h5 class="rmt-4 mt-3" translate *ngIf="tutor.gradeItems.length">Job Types which they take for</h5>
                 <h6 class="text-secondary">
                   <span *ngFor="let grade of tutor.gradeItems, let i = index"
                     >{{grade.name}}<span *ngIf="i < tutor.gradeItems.length - 1">, </span></span
                   >
                 </h6>
-                <h5 translate *ngIf="tutor.subjects.length">Subjects which they specialize in</h5>
+                <h5 translate *ngIf="tutor.subjects.length">Titles which they specialize in</h5>
                 <h6 class="text-secondary">
                   <span *ngFor="let subject of tutor.subjects; let i = index"
                     >{{ subject.name }}<span *ngIf="i < tutor.subjects.length - 1">, </span></span
                   >
                 </h6>
                 <!-- Tutor not option select category -->
-                <h5 translate *ngIf="tutor.categories && tutor.categories.length">Categories</h5>
+                <h5 translate *ngIf="tutor.categories && tutor.categories.length">JOb Skills</h5>
                 <h6 class="text-secondary" *ngIf="tutor.categories && tutor.categories.length">
                   <span *ngFor="let cat of tutor.categories, let i = index"
                     >{{cat.name}}<span *ngIf="i < tutor.categories.length - 1">, </span></span
@@ -200,7 +200,7 @@
     <div class="container">
       <div class="row no-margin">
         <div class="col-md-12 col-lg-12 col-sm-12">
-          <h3 class="color-light-black" translate>Group Classes</h3>
+          <h3 class="color-light-black" translate>Group Consultants</h3>
         </div>
         <div class="col-md-12" *ngIf="!webinars.length">
           <p>No results!</p>

@@ -1,5 +1,6 @@
 const Joi = require('joi');
 const moment = require('moment');
+
 exports.enroll = async (req, res, next) => {
   try {
     const validateSchema = Joi.object().keys({
@@ -32,7 +33,7 @@ exports.enroll = async (req, res, next) => {
     let subject = null;
     const targetType = validate.value.targetType;
     let target = null;
-    let filter = {
+    const filter = {
       targetId: validate.value.targetId
     };
     if (targetType === 'webinar') {
@@ -59,11 +60,9 @@ exports.enroll = async (req, res, next) => {
     }
 
     if (req.user._id.toString() === validate.value.tutorId.toString()) {
-      return next(
-        PopulateResponse.error({
-          message: 'Could not book your item'
-        })
-      );
+      return next(PopulateResponse.error({
+        message: 'Could not book your item'
+      }));
     }
 
     const params = Object.assign(filter, {
@@ -72,9 +71,7 @@ exports.enroll = async (req, res, next) => {
       $or: [{ userId: req.user._id }, { idRecipient: req.user._id }]
     });
 
-    const isEnroll = await DB.Transaction.count(
-      validate.value.type === 'booking' ? params : Object.assign({ emailRecipient: validate.value.emailRecipient }, params)
-    );
+    const isEnroll = await DB.Transaction.count(validate.value.type === 'booking' ? params : Object.assign({ emailRecipient: validate.value.emailRecipient }, params));
 
     if (isEnroll) {
       const message = validate.value.type === 'booking' ? 'You are enrolled this item' : 'You have already gifted this email';
@@ -83,20 +80,18 @@ exports.enroll = async (req, res, next) => {
     if (!target) {
       return res.status(404).send(PopulateResponse.notFound());
     }
-    const data = await Service.Payment.createPaymentIntentByStripe(
-      Object.assign(
-        {
-          userId: req.user._id,
-          tutorId: validate.value.tutorId,
-          price: targetType === 'subject' ? subject.price : target.price,
-          name: target.name || 'No name',
-          targetType,
-          target,
-          description: `${req.user.name} buy ${targetType} "${target.name}" of tutor ${tutor.name}`
-        },
-        validate.value
-      )
-    );
+    const data = await Service.Payment.createPaymentIntentByStripe(Object.assign(
+      {
+        userId: req.user._id,
+        tutorId: validate.value.tutorId,
+        price: targetType === 'subject' ? subject.price : target.price,
+        name: target.name || 'No name',
+        targetType,
+        target,
+        description: `${req.user.name} buy ${targetType} "${target.name}" of tutor ${tutor.name}`
+      },
+      validate.value
+    ));
     // if (!data.stripeClientSecret) {
     //   return next(PopulateResponse.error({ message: 'No transaction is possible! Please try again' }));
     // }
@@ -118,7 +113,9 @@ exports.list = async (req, res, next) => {
     });
     let excludeFields = {};
     if (req.user.role !== 'admin') {
-      excludeFields = { commission: 0, balance: 0, vat: 0, paymentInfo: 0 };
+      excludeFields = {
+        commission: 0, balance: 0, vat: 0, paymentInfo: 0
+      };
       query.userId = req.user._id;
     }
     const sort = Helper.App.populateDBSort(req.query);
@@ -132,28 +129,26 @@ exports.list = async (req, res, next) => {
       .limit(take)
       .exec();
 
-    items = await Promise.all(
-      items.map(async item => {
-        let target = null;
-        let subject = null;
-        if (item.targetId) {
-          if (item.targetType === 'webinar') {
-            target = await DB.Webinar.findOne({ _id: item.targetId }, { name: 1, alias: 1 });
-          } else if (item.targetType === 'subject') {
-            target = await DB.MyTopic.findOne({ _id: item.targetId }, { name: 1, alias: 1, mySubjectId: 1 });
-            if (!target) {
-              target = await DB.MySubject.findOne({ _id: item.targetId }, { name: 1, alias: 1 });
-            } else if (target && target.mySubjectId) {
-              subject = await DB.MySubject.findOne({ _id: target.mySubjectId }, { name: 1, alias: 1 });
-            }
+    items = await Promise.all(items.map(async (item) => {
+      let target = null;
+      let subject = null;
+      if (item.targetId) {
+        if (item.targetType === 'webinar') {
+          target = await DB.Webinar.findOne({ _id: item.targetId }, { name: 1, alias: 1 });
+        } else if (item.targetType === 'subject') {
+          target = await DB.MyTopic.findOne({ _id: item.targetId }, { name: 1, alias: 1, mySubjectId: 1 });
+          if (!target) {
+            target = await DB.MySubject.findOne({ _id: item.targetId }, { name: 1, alias: 1 });
+          } else if (target && target.mySubjectId) {
+            subject = await DB.MySubject.findOne({ _id: target.mySubjectId }, { name: 1, alias: 1 });
           }
         }
-        const data = item.toObject();
-        data[item.targetType] = target;
-        data.tutorSubject = subject;
-        return data;
-      })
-    );
+      }
+      const data = item.toObject();
+      data[item.targetType] = target;
+      data.tutorSubject = subject;
+      return data;
+    }));
     res.locals.list = {
       count,
       items
@@ -237,7 +232,7 @@ exports.booked = async (req, res, next) => {
       webinarId: id
     });
 
-    res.locals.booked = { booked: isEnroll && pendingAppointment ? true : false };
+    res.locals.booked = { booked: !!(isEnroll && pendingAppointment) };
     return next();
   } catch (error) {
     next(error);
@@ -259,22 +254,20 @@ exports.checkOverlapWebinar = async (req, res, next) => {
     if (!webinar) {
       return res.status(404).send(PopulateResponse.notFound());
     }
-    let overlapSlots = [];
+    const overlapSlots = [];
     const slots = await DB.Schedule.find({ webinarId: webinar._id }).exec();
     if (slots && slots.length > 0) {
-      await Promise.all(
-        slots.map(async slot => {
-          let checkOverlap = await Service.Booking.checkOverlapSlot({
-            userId: req.user._id,
-            startTime: slot.startTime.toISOString(),
-            toTime: slot.toTime.toISOString()
-          });
+      await Promise.all(slots.map(async (slot) => {
+        const checkOverlap = await Service.Booking.checkOverlapSlot({
+          userId: req.user._id,
+          startTime: slot.startTime.toISOString(),
+          toTime: slot.toTime.toISOString()
+        });
 
-          if (!moment.utc().add(30, 'minutes').isAfter(moment.utc(slot.startTime)) && !checkOverlap) {
-            overlapSlots.push(slot);
-          }
-        })
-      );
+        if (!moment.utc().add(30, 'minutes').isAfter(moment.utc(slot.startTime)) && !checkOverlap) {
+          overlapSlots.push(slot);
+        }
+      }));
     }
     res.locals.overlapSlots = {
       overlapSlots
@@ -295,7 +288,9 @@ exports.transactionOfTutor = async (req, res, next) => {
     });
     let excludeFields = {};
     if (req.user.role !== 'admin') {
-      excludeFields = { commission: 0, balance: 0, vat: 0, paymentInfo: 0 };
+      excludeFields = {
+        commission: 0, balance: 0, vat: 0, paymentInfo: 0
+      };
       query.tutorId = req.user._id;
     }
     const sort = Helper.App.populateDBSort(req.query);
@@ -307,30 +302,28 @@ exports.transactionOfTutor = async (req, res, next) => {
       .limit(take)
       .exec();
 
-    items = await Promise.all(
-      items.map(async item => {
-        let target = null;
-        let subject = null;
-        if (item.targetId) {
-          if (item.targetType === 'webinar') {
-            target = await DB.Webinar.findOne({ _id: item.targetId }, { name: 1, alias: 1 });
-          } else if (item.targetType === 'course') {
-            target = await DB.Course.findOne({ _id: item.targetId }, { name: 1, alias: 1 });
-          } else if (item.targetType === 'subject') {
-            target = await DB.MyTopic.findOne({ _id: item.targetId }, { name: 1, alias: 1, mySubjectId: 1 });
-            if (!target) {
-              target = await DB.MySubject.findOne({ _id: item.targetId }, { name: 1, alias: 1 });
-            } else if (target && target.mySubjectId) {
-              subject = await DB.MySubject.findOne({ _id: target.mySubjectId }, { name: 1, alias: 1 });
-            }
+    items = await Promise.all(items.map(async (item) => {
+      let target = null;
+      let subject = null;
+      if (item.targetId) {
+        if (item.targetType === 'webinar') {
+          target = await DB.Webinar.findOne({ _id: item.targetId }, { name: 1, alias: 1 });
+        } else if (item.targetType === 'course') {
+          target = await DB.Course.findOne({ _id: item.targetId }, { name: 1, alias: 1 });
+        } else if (item.targetType === 'subject') {
+          target = await DB.MyTopic.findOne({ _id: item.targetId }, { name: 1, alias: 1, mySubjectId: 1 });
+          if (!target) {
+            target = await DB.MySubject.findOne({ _id: item.targetId }, { name: 1, alias: 1 });
+          } else if (target && target.mySubjectId) {
+            subject = await DB.MySubject.findOne({ _id: target.mySubjectId }, { name: 1, alias: 1 });
           }
         }
-        const data = item.toObject();
-        data[item.targetType] = target;
-        data.tutorSubject = subject;
-        return data;
-      })
-    );
+      }
+      const data = item.toObject();
+      data[item.targetType] = target;
+      data.tutorSubject = subject;
+      return data;
+    }));
     res.locals.listOfTutor = {
       count,
       items
@@ -338,5 +331,83 @@ exports.transactionOfTutor = async (req, res, next) => {
     next();
   } catch (e) {
     next(e);
+  }
+};
+
+exports.myCourse = async (req, res, next) => {
+  const page = Math.max(0, req.query.page - 1) || 0; // using a zero-based page index for use with skip()
+  const take = parseInt(req.query.take, 10) || 10;
+
+  try {
+    const query = Helper.App.populateDbQuery(req.query, {
+      text: ['description'],
+      equal: ['userId', 'targetId']
+    });
+    const type = 'course';
+    if (!type) {
+      return next(PopulateResponse.validationError());
+    }
+    query.targetType = type;
+    if (req.user) {
+      query.userId = req.user._id;
+    }
+
+    const selectData =
+      type === 'tutor'
+        ? { path: 'tutor', select: 'name avatarUrl username country featured ratingAvg totalRating avatar' }
+        : type === 'webinar'
+          ? {
+            path: 'webinar',
+            select: 'name tutorId mainImageId featured lastSlot price description alias',
+            populate: [
+              {
+                path: 'mainImage'
+              },
+              {
+                path: 'tutor',
+                select: 'name avatarUrl username country featured ratingAvg totalRating avatar'
+              }
+            ]
+          }
+          : {
+            path: 'course',
+            select: 'name tutorId mainImageId price description alias',
+            populate: [
+              {
+                path: 'mainImage'
+              },
+              {
+                path: 'tutor',
+                select: 'name avatarUrl username country featured ratingAvg totalRating avatar'
+              }
+            ]
+          };
+
+    query.paid = true;
+
+    const sort = Helper.App.populateDBSort(req.query);
+    const count = await DB.Transaction.count(query);
+    const items = await DB.Transaction.find(query)
+      .populate(selectData)
+      .populate({
+        path: 'course',
+        populate: {
+          path: 'categories'
+        }
+      })
+      .sort(sort)
+      .skip(page * take)
+      .limit(take)
+      .exec();
+    let itemsCheckFavorite = [];
+    switch (type) {
+      case 'course':
+        itemsCheckFavorite = await Service.Payment.isBooked(items, req.user._id);
+        break;
+    }
+    res.locals.list = { count, items: itemsCheckFavorite };
+    next();
+  } catch (e) {
+    return next(e);
   }
 };

@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col col-md-12">
-    <p class="total-items"><b>Total group classes: {{count}}</b></p>
+    <p class="total-items"><b>Total Consultant Group: {{count}}</b></p>
     <div class="card">
       <div class="card-block table-responsive">
         <table class="table">
@@ -18,7 +18,7 @@
                 </span>
               </th>
               <th>
-                <a (click)="sortBy('tutor', 'desc')">Tutor name</a>
+                <a (click)="sortBy('tutor', 'desc')">Consultant name</a>
                 <span *ngIf="sortOption.sortBy=='tutor'">
                   <a (click)="sortBy('tutor', 'asc')" *ngIf="sortOption.sortType=='desc'"
                     ><i class="fa fa-caret-down"></i
@@ -29,7 +29,7 @@
                 </span>
               </th>
               <th>
-                <a>Categories</a>
+                <a>Job-Skill</a>
               </th>
               <th>
                 <a (click)="sortBy('ordering', 'desc')">Maximum strength</a>
@@ -86,7 +86,7 @@
                     name="name"
                     class="form-control"
                     [(ngModel)]="searchFields.name"
-                    placeholder="Enter group class name"
+                    placeholder="Enter consultant group name"
                   />
                 </div>
               </td>
@@ -99,7 +99,7 @@
                   [ngbTypeahead]="search"
                   [resultTemplate]="rt"
                   [inputFormatter]="formatter"
-                  placeholder="Search tutor"
+                  placeholder="Search consultant"
                 />
                 <ng-template #rt let-r="result" let-t="term">
                   <ngb-highlight [result]="r.name" [term]="t">{{r?.name}}</ngb-highlight>
@@ -114,7 +114,7 @@
                     bindLabel="name"
                     [closeOnSelect]="true"
                     name="category"
-                    placeholder="Choose category"
+                    placeholder="Choose job-skill"
                     [(ngModel)]="categoryIds"
                     bindValue="_id"
                     #categoryId="ngModel"

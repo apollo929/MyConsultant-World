@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h2 class="modal-title" translate>My category</h2>
+  <h2 class="modal-title" translate>My skills</h2>
   <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -7,7 +7,7 @@
 <div class="modal-body">
   <form #frm="ngForm" (submit)="submit(frm)">
     <div class="form-group">
-      <label translate>Select Category</label>
+      <label translate>Select skills</label>
       <ng-select
         [items]="categories"
         bindLabel="name"

@@ -29,6 +29,7 @@ describe('Test tutor endpoints', () => {
       .field('name', 'tutorname')
       .field('email', 'testingtutor@yopmail.com')
       .field('password', '123456')
+      .field('country', 'Spain')
       .expect(200)
       .then(async (res) => {
         const body = res.body.data;

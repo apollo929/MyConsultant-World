@@ -30,7 +30,14 @@
     </div>
   </div>
   <p *ngIf="uploader.queue.length && !autoUpload">
-    <button type="button" class="btn btn-primary btn-pink" *ngIf="!uploadOnSelect" (click)="upload()" translate>
+    <button
+      [disabled]="disable"
+      type="button"
+      class="btn btn-primary btn-pink"
+      *ngIf="!uploadOnSelect"
+      (click)="upload()"
+      translate
+    >
       {{ options.uploadText || 'Upload' }}
     </button>
   </p>

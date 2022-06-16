@@ -189,7 +189,7 @@ module.exports = async () =>
         {
           key: 'maxFreeSlotToBook',
           value: 5,
-          name: 'Maximum number of free trial classes one student can take',
+          name: 'Maximum number of free trial classes one customer can take',
           description: '',
           public: true,
           ordering: 19
@@ -205,7 +205,7 @@ module.exports = async () =>
         {
           key: 'teachwithusStudents',
           value: '150',
-          name: 'Teach with us page - Number of students world wide',
+          name: 'Hire us - Number of customers world wide',
           description: '',
           public: true,
           ordering: 20

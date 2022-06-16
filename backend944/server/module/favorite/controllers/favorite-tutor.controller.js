@@ -1,5 +1,6 @@
 const Joi = require('joi');
 const dto = require('../../tutor/dto');
+
 const validateSchema = Joi.object().keys({
   tutorId: Joi.string().required()
 });
@@ -62,20 +63,20 @@ exports.list = async (req, res, next) => {
     query.type = 'tutor';
     const sort = Helper.App.populateDBSort(req.query);
     const count = await DB.Favorite.count(query);
-    let items = await DB.Favorite.find(query)
+    const items = await DB.Favorite.find(query)
       .populate({ path: 'tutor', select: 'name avatarUrl username country featured ratingAvg totalRating avatar' })
       .sort(sort)
       .skip(page * take)
       .limit(take)
       .exec();
     const tutors = items.length
-      ? items.map(item => {
-          if (item.tutor) {
-            item = item.tutor.getPublicProfile();
-            item.isFavorite = true;
-            return item;
-          }
-        })
+      ? items.map((item) => {
+        if (item.tutor) {
+          item = item.tutor.getPublicProfile();
+          item.isFavorite = true;
+          return item;
+        }
+      })
       : [];
     res.locals.list = { count, items: tutors };
     next();

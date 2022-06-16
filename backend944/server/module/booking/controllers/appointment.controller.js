@@ -59,24 +59,22 @@ exports.list = async (req, res, next) => {
       .limit(take)
       .exec();
 
-    items = await Promise.all(
-      items.map(item => {
-        const data = item.toObject();
-        if (
-          data.zoomData &&
+    items = await Promise.all(items.map((item) => {
+      const data = item.toObject();
+      if (
+        data.zoomData &&
           data.zoomData.start_url &&
           data.transaction &&
           data.transaction.paid &&
           !data.transaction.isRefund &&
           data.status !== 'canceled' &&
           data.status !== 'not-start'
-        ) {
-          data.zoomUrl = req.user.type === 'tutor' ? data.zoomData.start_url : data.zoomData.join_url;
-        }
-        delete data.zoomData;
-        return data;
-      })
-    );
+      ) {
+        data.zoomUrl = req.user.type === 'tutor' ? data.zoomData.start_url : data.zoomData.join_url;
+      }
+      delete data.zoomData;
+      return data;
+    }));
 
     res.locals.list = {
       count,
@@ -276,14 +274,12 @@ exports.updateDocument = async (req, res, next) => {
 exports.uploadDocument = async (req, res, next) => {
   try {
     if (!req.file) {
-      return next(
-        PopulateResponse.error(
-          {
-            message: 'Missing document'
-          },
-          'ERR_MISSING_FILE'
-        )
-      );
+      return next(PopulateResponse.error(
+        {
+          message: 'Missing document'
+        },
+        'ERR_MISSING_FILE'
+      ));
     }
 
     const file = await Service.Media.createFile({
@@ -302,7 +298,7 @@ exports.uploadDocument = async (req, res, next) => {
           const toTimeUser = user.timezone
             ? momentTimeZone(req.appointment.toTime).tz(user.timezone).format('DD/MM/YYYY HH:mm')
             : moment(req.appointment.toTime).format('DD/MM/YYYY HH:mm');
-          if (user.notificationSettings)
+          if (user.notificationSettings) {
             await Service.Mailer.send('material/class-uploaded.html', user.email, {
               subject: 'New material uploaded',
               user: user.getPublicProfile(),
@@ -312,6 +308,7 @@ exports.uploadDocument = async (req, res, next) => {
               startTime: startTimeUser,
               toTime: toTimeUser
             });
+          }
         } else {
           const startTimeUser = tutor.timezone
             ? momentTimeZone(req.appointment.startTime).tz(tutor.timezone).format('DD/MM/YYYY HH:mm')
@@ -319,16 +316,17 @@ exports.uploadDocument = async (req, res, next) => {
           const toTimeUser = tutor.timezone
             ? momentTimeZone(req.appointment.toTime).tz(tutor.timezone).format('DD/MM/YYYY HH:mm')
             : moment(req.appointment.toTime).format('DD/MM/YYYY HH:mm');
-          if (tutor.notificationSettings)
+          if (tutor.notificationSettings) {
             await Service.Mailer.send('material/class-uploaded-by-student.html', tutor.email, {
               subject: 'New material uploaded',
               user: user.getPublicProfile(),
               tutor: tutor.getPublicProfile(),
-              title: 'New Material Uploaded By Student!',
+              title: 'New Material Uploaded By Customer!',
               appointment: req.appointment.toObject(),
               startTime: startTimeUser,
               toTime: toTimeUser
             });
+          }
         }
       }
     }
@@ -344,13 +342,11 @@ exports.reSchedule = async (req, res, next) => {
   try {
     const appointment = await DB.Appointment.findOne({ _id: req.params.id });
     if (!appointment) return next(PopulateResponse.notFound());
-    let canReschedule = await Service.Appointment.canReschedule(appointment);
+    const canReschedule = await Service.Appointment.canReschedule(appointment);
     if (!canReschedule) {
-      return next(
-        PopulateResponse.error({
-          message: 'Cannot reschedule the class starting within 8 hours'
-        })
-      );
+      return next(PopulateResponse.error({
+        message: 'Cannot reschedule the class starting within 8 hours'
+      }));
     }
     const startTime = req.body.startTime;
     const toTime = req.body.toTime;
@@ -374,9 +370,9 @@ exports.reSchedule = async (req, res, next) => {
 
 exports.canReschedule = async (req, res, next) => {
   try {
-    let canReschedule = await Service.Appointment.canReschedule(req.appointment);
+    const canReschedule = await Service.Appointment.canReschedule(req.appointment);
     res.locals.canReschedule = {
-      canReschedule: canReschedule
+      canReschedule
     };
     return next();
   } catch (e) {
@@ -406,7 +402,7 @@ exports.reviewStudent = async (req, res, next) => {
       return next(PopulateResponse.forbidden());
     }
     if (appointment.status !== 'completed') {
-      return next(PopulateResponse.error({ message: 'You can review student only when the appointment is completed' }));
+      return next(PopulateResponse.error({ message: 'You can review customer only when the appointment is completed' }));
     }
 
     const review = {
@@ -425,10 +421,10 @@ exports.reviewStudent = async (req, res, next) => {
     const tutor = req.user;
 
     if (req.body.updated == false && student.notificationSettings == true) {
-      //send mail notify to student
+      // send mail notify to student
       await Service.Mailer.send('review/notify-review-student.html', student.email, {
-        subject: `Your teacher reviewed the meeting #${appointment.code}`,
-        review: review,
+        subject: `Your consultant reviewed the meeting #${appointment.code}`,
+        review,
         appointment: appointment.toObject(),
         tutor: tutor.toObject(),
         student: student.toObject(),
@@ -436,7 +432,7 @@ exports.reviewStudent = async (req, res, next) => {
       });
     }
     res.locals.review = {
-      review: review
+      review
     };
     return next();
   } catch (e) {

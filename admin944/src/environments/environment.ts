@@ -8,8 +8,8 @@ export const environment = {
   version: '3.0.4',
   build: 1,
   maximumFileSize: 15,
-  apiBaseUrl: 'https://v2-api.livelearn.info/v1',
-  // apiBaseUrl: 'https://api.mytutoring.pro/v1',
-  // apiBaseUrl: 'http://localhost:9000/v1',
+  // apiBaseUrl: 'https://v2-api.livelearn.info/v1',      //Test Site URL
+  // apiBaseUrl: 'https://api.mytutoring.pro/v1',         //Live Site URl
+  apiBaseUrl: 'http://localhost:9000/v1',                 //Localhost URL
   platform: 'admin'
 };

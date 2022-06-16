@@ -98,12 +98,12 @@
       <div class="col-md-12 d-flex align-items-center justify-content-center classes">
         <div class="d-flex justify-content-end">
           <label class="custom-checkbox mr-4 font-md" translate
-            ><span translate>Paid Class</span>
+            ><span translate>Hire for Paid</span>
             <input type="radio" selected name="type" [(ngModel)]="booking.isFree" [value]="false" />
             <span class="checkmark"></span>
           </label>
           <label class="custom-checkbox font-md"
-            ><span translate>Free Class</span>
+            ><span translate>Hire for Free</span>
             <input type="radio" name="type" [(ngModel)]="booking.isFree" [value]="true" [disabled]="appliedCoupon" />
             <span class="checkmark"></span>
           </label>
@@ -140,7 +140,7 @@
       <div class="col-md-4 d-flex align-items-center justify-content-center flex-direction-column">
         <h5 translate>Step 1</h5>
         <select class="custom-select" [(ngModel)]="selectedCategoryId" (change)="selectMyCategory()">
-          <option selected value="" translate>Select Category</option>
+          <option selected value="" translate>Select Skills</option>
           <option *ngFor="let cat of myCategories" [value]="cat._id">{{cat.name}}</option>
         </select>
       </div>
@@ -155,7 +155,7 @@
         <h5 translate>Step 3</h5>
         <div class="step-3">
           <select class="custom-select mr-1" [(ngModel)]="booking.targetId" (change)="changeTopic()">
-            <option selected value="" translate>Select Topic</option>
+            <option selected value="" translate>Select Tasks</option>
             <option *ngFor="let topic of myTopics" [value]="topic._id">{{topic.name}}</option>
           </select>
           <span class="slot-btn">
@@ -197,13 +197,13 @@
     </div>
   </div>
 </section>
-<div class="pb-100">
+<!-- <div class="pb-100">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
         <div class="row">
           <div class="col-md-12 mb-4">
-            <h3 translate>Group Classes</h3>
+            <h3 translate>Group Consultants</h3>
             <p *ngIf="webinarOptions.count==0" translate>There is no results</p>
           </div>
         </div>
@@ -230,14 +230,14 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 <section class="pb-100">
   <div class="container">
     <div class="row">
       <div class="col-md-12 text-center">
-        <h2 class="color-light-black" translate>Book Offline Tutoring</h2>
+        <h2 class="color-light-black" translate>Book Offline Consulting</h2>
         <p class="content-title" translate>
-          <span translate>Search offline tutoring with</span> {{tutor.name}} <span translate>with zip code.</span>
+          <span translate>Search offline consulting with</span> {{tutor.name}} <span translate>with zip code.</span>
         </p>
         <div class="cta-input">
           <div class="input-group mt-4">

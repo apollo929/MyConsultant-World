@@ -3,6 +3,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const mkdirp = require('mkdirp');
+
 const documentDir = 'public/documents/';
 
 if (!fs.existsSync(documentDir)) {
@@ -28,7 +29,7 @@ const uploadDocument = multer({
   })
 });
 
-module.exports = router => {
+module.exports = (router) => {
   /**
    * @apiGroup Appointment
    * @apiVersion 1.0.0

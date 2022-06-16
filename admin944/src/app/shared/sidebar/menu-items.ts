@@ -24,7 +24,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: '/tutor/list',
-    title: 'Tutors',
+    title: 'Consultants',
     icon: 'fa fa-user',
     class: 'has-arrow',
     label: '',
@@ -33,7 +33,7 @@ export const ROUTES: RouteInfo[] = [
     submenu: [
       {
         path: '/tutor/list',
-        title: 'List tutors',
+        title: 'List consultants',
         icon: 'fa fa-user',
         class: '',
         label: '',
@@ -55,7 +55,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: '/users/list',
-    title: 'Students',
+    title: 'Customers',
     icon: 'fa fa-users',
     class: 'has-arrow',
     label: '',
@@ -64,7 +64,7 @@ export const ROUTES: RouteInfo[] = [
     submenu: [
       {
         path: '/users/list',
-        title: 'List students',
+        title: 'List customers',
         icon: 'fa fa-users',
         class: '',
         label: '',
@@ -116,7 +116,7 @@ export const ROUTES: RouteInfo[] = [
     submenu: [
       {
         path: '/grades/list',
-        title: 'Grades',
+        title: 'Job-Type',
         icon: 'fa fa-graduation-cap',
         class: 'has-arrow',
         label: '',
@@ -125,7 +125,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: [
           {
             path: '/grades/list',
-            title: 'List grades',
+            title: 'List Job-Types',
             icon: 'fa fa-graduation-cap',
             class: '',
             label: '',
@@ -147,7 +147,7 @@ export const ROUTES: RouteInfo[] = [
       },
       {
         path: '/categories/list',
-        title: 'Categories',
+        title: 'job Skills',
         icon: 'fa fa-bars',
         class: 'has-arrow',
         label: '',
@@ -156,7 +156,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: [
           {
             path: '/categories/list',
-            title: 'List categories',
+            title: 'List job skills',
             icon: 'fa fa-bars',
             class: '',
             label: '',
@@ -273,7 +273,7 @@ export const ROUTES: RouteInfo[] = [
   // },
   {
     path: '/testimonials/list',
-    title: 'Classes',
+    title: 'Group',
     icon: 'fa fa-text-width',
     class: 'has-arrow',
     label: '',
@@ -282,7 +282,7 @@ export const ROUTES: RouteInfo[] = [
     submenu: [
       {
         path: '/webinars/list',
-        title: 'Group Classes',
+        title: 'Consultant Group',
         icon: 'fa fa-text-width',
         class: 'has-arrow',
         label: '',
@@ -291,7 +291,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: [
           {
             path: '/webinars/list',
-            title: 'List Group Classes',
+            title: 'List Consultant Group',
             icon: 'fa fa-text-width',
             class: '',
             label: '',

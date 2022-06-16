@@ -110,7 +110,7 @@
                     bindLabel="name"
                     [closeOnSelect]="true"
                     name="category"
-                    placeholder="Choose category"
+                    placeholder="Choose job-skill"
                     [(ngModel)]="webinar.categoryIds"
                     bindValue="originalCategoryId"
                     #categoryId="ngModel"
@@ -119,7 +119,7 @@
                   >
                   </ng-select>
                   <div *ngIf="categoryId.errors && (categoryId.dirty || categoryId.touched || isSubmitted)">
-                    <p [hidden]="!categoryId.errors.required" style="color: red" translate>Please choose category!</p>
+                    <p [hidden]="!categoryId.errors.required" style="color: red" translate>Please choose job-skill!</p>
                   </div>
                 </div>
               </div>
@@ -170,7 +170,7 @@
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label>Grades</label>
+                  <label>job-Types</label>
                   <ng-select
                     [items]="grades"
                     multiple="true"

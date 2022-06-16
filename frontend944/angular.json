@@ -21,7 +21,7 @@
               "src/favicon.ico",
               {
                 "glob": "**/*",
-                "input": "/assets/",
+                "input": "node_modules/ngx-extended-pdf-viewer/assets/",
                 "ignore": ["**/*.scss"],
                 "output": "/assets/"
               }

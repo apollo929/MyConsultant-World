@@ -188,7 +188,7 @@ export class BookingComponent implements OnInit {
       startTime: time.start,
       toTime: time.end
     };
-    
+
     if (time.extendedProps.isDST) {
       this.timeSelected.startTime = time.extendedProps.item.startTime;
       this.timeSelected.toTime = time.extendedProps.item.toTime;
@@ -212,7 +212,7 @@ export class BookingComponent implements OnInit {
         this.toasty.error(this.translate.instant(e.data.data.message || 'Something went wrong, please try again!'));
       });
   }
-  
+
   multiplebookingAppointment() {
 
     const modalStripe = this.modalService.open(ConfirmModalComponent, {
@@ -226,7 +226,7 @@ export class BookingComponent implements OnInit {
     modalStripe.componentInstance.price *= this.bookinglist.length;
     modalStripe.componentInstance.config = this.config;
     modalStripe.componentInstance.appliedCoupon = this.appliedCoupon;
-    
+
     modalStripe.result.then(
       result => {
         if (result.confirmed) {
@@ -320,7 +320,7 @@ export class BookingComponent implements OnInit {
     if (!this.usedCoupon && this.coupon && this.coupon._id && this.appliedCoupon) {
       this.booking.couponCode = this.coupon.code;
     }
-    
+
     if (timeSlot.backgroundColor == '#0d3c18') {
       const bookingTemp = Object.assign({}, this.booking);
       this.bookinglist.push(bookingTemp);
@@ -379,7 +379,7 @@ export class BookingComponent implements OnInit {
         .favorite(params, 'tutor')
         .then(res => {
           this.tutor.isFavorite = true;
-          this.toasty.success(this.translate.instant('Added to your favorite tutor list successfully!'));
+          this.toasty.success(this.translate.instant('Added to your favorite consultant list successfully!'));
         })
         .catch(() => this.toasty.error(this.translate.instant('Something went wrong, please try again!')));
     }
@@ -392,7 +392,7 @@ export class BookingComponent implements OnInit {
         .unFavorite(this.tutor._id, 'tutor')
         .then(res => {
           this.tutor.isFavorite = false;
-          this.toasty.success(this.translate.instant('Deleted from your favorite tutor list successfully!'));
+          this.toasty.success(this.translate.instant('Deleted from your favorite consultant list successfully!'));
         })
         .catch(() => this.toasty.error(this.translate.instant('Something went wrong, please try again!')));
     }
