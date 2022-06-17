@@ -11,7 +11,7 @@ const routes: Routes = [
     component: TutorCreateComponent,
     data: {
       title: 'Create New Consultant',
-      urls: [{ title: 'Tutors', url: '/tutor/list' }, { title: 'Listing' }]
+      urls: [{ title: 'Consultants', url: '/tutor/list' }, { title: 'Listing' }]
     },
     resolve: {
       appConfig: ConfigResolver

@@ -237,6 +237,9 @@
                       <div *ngIf="language.errors && (language.dirty || language.touched || isSubmitted)">
                         <p [hidden]="!language.errors.required" style="color: red">Please select consultant language!</p>
                       </div>
+                      <!-- <div *ngIf="info.languages.count() === 5" ngModel = "selected">
+                        <p>error language</p>
+                      </div> -->
                     </div>
                   </div>
                   <div class="col-md-6">
