@@ -48,7 +48,7 @@
                     type="search"
                     class="form-control form-control-sm"
                     aria-controls="table_id"
-                    placeholder="{{'Search consultant, customer, titles, group'|translate}}"
+                    placeholder="{{'Search consultant, customer, subjects, group'|translate}}"
                     (keyup)="doSearch($event)"
                   />
                 </label>
@@ -71,7 +71,7 @@
                     <app-sort [sortOption]="sortOption" [sortBy]="'userId'" (onSort)="onSort($event)"></app-sort>
                   </th>
                   <th>
-                    <span (click)="sortBy('webinarId', 'desc')" translate>Titles / Group</span>
+                    <span (click)="sortBy('webinarId', 'desc')" translate>Subjects / Group</span>
                     <app-sort [sortOption]="sortOption" [sortBy]="'webinarId'" (onSort)="onSort($event)"></app-sort>
                   </th>
                   <th>

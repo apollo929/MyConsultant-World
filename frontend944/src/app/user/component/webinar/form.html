@@ -136,7 +136,7 @@
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label>Titles (*)</label>
+                  <label>Subjects (*)</label>
                   <ng-select
                     [items]="mySubjects"
                     multiple="true"
@@ -144,7 +144,7 @@
                     bindLabel="name"
                     [closeOnSelect]="true"
                     name="subject"
-                    placeholder="Choose titles"
+                    placeholder="Choose subjects"
                     [(ngModel)]="webinar.subjectIds"
                     bindValue="originalSubjectId"
                     #subjectId="ngModel"

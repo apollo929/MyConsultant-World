@@ -9,7 +9,7 @@
                 <a href="javascript:void(0)" (click)="onTabSelect('subject')" translate>One on One relation</a>
               </li>
               <li role="presentation" [ngClass]="{'active': tab === 'webinar'}">
-                <a href="javascript:void(0)" (click)="onTabSelect('webinar')" translate>Group Consultants</a>
+                <a href="javascript:void(0)" (click)="onTabSelect('webinar')" translate>Consultant Group</a>
               </li>
             </ul>
           </div>
@@ -48,7 +48,7 @@
                     type="search"
                     class="form-control form-control-sm"
                     aria-controls="table_id"
-                    placeholder="{{'Search consultant, customer, titles'|translate}}"
+                    placeholder="{{'Search consultant, customer, subjects'|translate}}"
                     (keyup)="doSearch($event)"
                   />
                 </label>
@@ -85,7 +85,7 @@
                     colspan="1"
                     aria-label="Subject: activate to sort column ascending"
                   >
-                    <span (click)="sortBy('webinarId', 'desc')" translate>Titles / Consultant Group</span>
+                    <span (click)="sortBy('webinarId', 'desc')" translate>Subjects / Consultant Group</span>
                     <app-sort [sortOption]="sortOption" [sortBy]="'webinarId'" (onSort)="onSort($event)"></app-sort>
                   </th>
                   <th

@@ -106,7 +106,7 @@
                   </a>
                   <a class="btn btn-blue rmr-2 scrollTo" id="btn-view-webinars">
                     <img src="../assets/images/webinar.svg" alt="view webinars" class="img-sm mt-n1 mr-1" translate />
-                    <span translate>View Group Consultants</span>
+                    <span translate>View Consultant Group</span>
                   </a>
                 </div>
                 <h5 class="rmt-4 mt-3" translate *ngIf="tutor.gradeItems.length">Job Types which they take for</h5>
@@ -115,7 +115,7 @@
                     >{{grade.name}}<span *ngIf="i < tutor.gradeItems.length - 1">, </span></span
                   >
                 </h6>
-                <h5 translate *ngIf="tutor.subjects.length">Titles which they specialize in</h5>
+                <h5 translate *ngIf="tutor.subjects.length">Subjects which they specialize in</h5>
                 <h6 class="text-secondary">
                   <span *ngFor="let subject of tutor.subjects; let i = index"
                     >{{ subject.name }}<span *ngIf="i < tutor.subjects.length - 1">, </span></span
@@ -200,7 +200,7 @@
     <div class="container">
       <div class="row no-margin">
         <div class="col-md-12 col-lg-12 col-sm-12">
-          <h3 class="color-light-black" translate>Group Consultants</h3>
+          <h3 class="color-light-black" translate>Consultant Group</h3>
         </div>
         <div class="col-md-12" *ngIf="!webinars.length">
           <p>No results!</p>

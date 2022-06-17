@@ -15,7 +15,9 @@
           </div>
           <div class="dashboard-profile-content pt-1">
             <h4 class="color-white">{{info.name}}</h4>
-            <p class="color-white font-weight-bold">{{info.type}}</p>
+            <!-- <p class="color-white font-weight-bold">{{info.type}}</p> -->
+            <p class="color-white font-weight-bold" *ngIf="info.type === 'tutor'">Consultant</p>
+            <p class="color-white font-weight-bold" *ngIf="info.type === 'student'">Customer</p>
             <a class="btn btn-outline border-radius-md font-weight-bold" (click)="isEditProfile=!isEditProfile"
               ><i class="fas fa-cog mr-2"></i>
               <span translate *ngIf="isEditProfile">Cancel</span>

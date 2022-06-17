@@ -108,7 +108,7 @@
           </div>
           <div class="card-body text-center">
             <h3 class="card-title" translate>Group consultant bookings</h3>
-            <p class="card-text" translate>The appointments made by this consultant for the group consultants.</p>
+            <p class="card-text" translate>The appointments made by this consultant for the consultant group.</p>
             <a class="color-light-red" [routerLink]="['/users/appointments']" translate
               ><span translate><span translate>Know More</span></span> <i class="fa fa-chevron-right font-sm ml-1"></i
             ></a>
@@ -262,29 +262,29 @@
           </div>
           <div class="card-body text-center">
             <h3 class="card-title" translate>Browse Group from skills.</h3>
-            <p class="card-text" translate>The customers can filter by skills and browse the group consultants.</p>
+            <p class="card-text" translate>The customers can filter by skills and browse the Consultant Group.</p>
             <a class="color-light-red" [routerLink]="['/categories']"
               ><span translate><span translate>Know More</span></span> <i class="fa fa-chevron-right font-sm ml-1"></i
             ></a>
           </div>
         </div>
       </div>
-      <div class="col-md-3 mb-4 rmt-4">
+      <!-- <div class="col-md-3 mb-4 rmt-4">
         <div class="card h-100 box-shadow-xs border-none">
           <div class="d-flex justify-content-center align-items-center pt-3">
             <div class="img-card bg-color-red">
               <img src="../../assets/images/dashboard/webinar-categories.svg" />
             </div>
           </div>
-          <!-- <div class="card-body text-center">
+          <div class="card-body text-center">
             <h3 class="card-title" translate>Browse Course categories  </h3>
             <p class="card-text" translate>The customers can filter by categories and browse the courses.</p>
             <a class="color-light-red" [routerLink]="['/categories']"
               ><span translate><span translate>Know More</span></span> <i class="fa fa-chevron-right font-sm ml-1"></i
             ></a>
-          </div> -->
+          </div>
         </div>
-      </div>
+      </div> -->
       <div class="col-md-3 mb-4">
         <div class="card h-100 box-shadow-xs border-none">
           <div class="d-flex justify-content-center align-items-center pt-3">
@@ -293,8 +293,10 @@
             </div>
           </div>
           <div class="card-body text-center">
-            <h3 class="card-title" translate>Browse Titles</h3>
-            <p class="card-text" translate>The customers can filter by titles and browse.</p>
+            <h3 class="card-title" translate>Browse Subjects</h3>
+            <p class="card-text" translate>The customers can filter by browse subject.
+              The customers can filter by job-skills
+            </p>
 
             <a class="color-light-red" [routerLink]="['/tutors/subject']"
               ><span translate><span translate>Know More</span></span> <i class="fa fa-chevron-right font-sm ml-1"></i
@@ -312,7 +314,7 @@
           <div class="card-body text-center">
             <h3 class="card-title" translate>Find a Consultant</h3>
             <p class="card-text" translate>
-              The customers can find consultants with name, titles, skills and availability.
+              The customers can find consultants with name, subjects, skills, types and availability.
             </p>
             <a class="color-light-red" [routerLink]="['/tutors']"
               ><span translate><span translate>Know More</span></span> <i class="fa fa-chevron-right font-sm ml-1"></i
@@ -361,7 +363,10 @@
           </div>
           <div class="card-body text-center">
             <h3 class="card-title" translate>Refund Request</h3>
-            <p class="card-text" translate>The refund request for the customer will be displayed.</p>
+            <p class="card-text" translate>The refund request for the customer will be displayed.
+              In here, Payment is made.
+
+            </p>
             <a class="color-light-red" [routerLink]="['/users/refund/request']"
               ><span translate><span translate>Know More</span></span> <i class="fa fa-chevron-right font-sm ml-1"></i
             ></a>
@@ -377,7 +382,9 @@
           </div>
           <div class="card-body text-center">
             <h3 class="card-title" translate>My Messages</h3>
-            <p class="card-text" translate>The conversations of the customer with other users.</p>
+            <p class="card-text" translate>The conversations of the customer with other users.
+              The content is displayed here.
+            </p>
             <a class="color-light-red" [routerLink]="['/users/messages/conversations']"
               ><span translate><span translate>Know More</span></span> <i class="fa fa-chevron-right font-sm ml-1"></i
             ></a>

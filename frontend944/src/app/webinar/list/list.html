@@ -45,7 +45,7 @@
           </select>
         </div>
         <div class="form-group mr-3 rmr-0">
-          <label class="font-weight-bold font-sm" translate>Filter By Titles</label>
+          <label class="font-weight-bold font-sm" translate>Filter By Subjects</label>
           <select class="custom-select" [(ngModel)]="searchFields.subjectIds" (change)="selectSubject()">
             <option selected translate value="">None</option>
             <option *ngFor="let sub of subjects" value="{{sub._id}}">{{sub.name}}</option>
@@ -76,7 +76,7 @@
     </div>
     <div class="row mt-4 mb-3">
       <div class="col-md-12">
-        <h4><strong translate>Group Consultants</strong></h4>
+        <h4><strong translate>Consultant Group</strong></h4>
         <div class="input-group shadow-sm input-shadow br-3" style="margin-top: 1.82em">
           <div class="input-group-prepend border-none">
             <span class="input-group-text">
