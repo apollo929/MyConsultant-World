@@ -43,3 +43,8 @@ MongoDB
 "cd frontend" : npm install && to fix the error 'npm audit fix'
 
 
+## Add Function
+
+1. Choose JobTypes : over up to 5
+2. Choose Languages : over up to 5
+
