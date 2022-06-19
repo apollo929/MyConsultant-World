@@ -13,7 +13,7 @@ import * as _ from 'lodash';
       [multiple]="true"
       [closeOnSelect]="false"
       [(ngModel)]="tutor.grades"
-      placeholder="{{ 'Choose grades' | translate }}"
+      placeholder="{{ 'Choose Job-Types' | translate }}"
       bindValue="key"
       name="grade"
       #grades="ngModel"
@@ -21,7 +21,7 @@ import * as _ from 'lodash';
     >
     </ng-select>
     <div *ngIf="grades.errors && (grades.dirty || grades.touched || isSubmitted)">
-      <p [hidden]="!grades.errors.required" style="color:red">Please choose grades!</p>
+      <p [hidden]="!grades.errors.required" style="color:red">Please choose job-types!</p>
     </div>
   `
 })

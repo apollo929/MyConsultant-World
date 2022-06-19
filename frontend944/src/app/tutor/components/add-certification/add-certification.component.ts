@@ -55,6 +55,7 @@ export class AddCetificationComponent implements OnInit {
         document: null
       };
     }
+    console.log(this.certificate);
   }
 
   submit(frm: any) {

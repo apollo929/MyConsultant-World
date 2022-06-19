@@ -46,7 +46,7 @@ export class ApplyCouponComponent implements OnInit {
       return this.toasty.error(this.translate.instant('Please login to use the coupon!'));
     }
     if (!this.options.topicId && this.options.targetType === 'subject') {
-      return this.toasty.error(this.translate.instant('Please choose category, subject and topic first!'));
+      return this.toasty.error(this.translate.instant('Please choose job-skill, subject and topic first!'));
     }
     if (this.appliedCoupon) {
       this.appliedCoupon = !this.appliedCoupon;

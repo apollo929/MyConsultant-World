@@ -11,7 +11,7 @@ import * as _ from 'lodash';
       [multiple]="true"
       [closeOnSelect]="false"
       [(ngModel)]="tutor.grades"
-      placeholder="Choose grades"
+      placeholder="Choose Job-Types"
       bindValue="key"
       name="grade"
       #grades="ngModel"

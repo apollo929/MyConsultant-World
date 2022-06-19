@@ -6,7 +6,7 @@
           <div class="wizard-inner">
             <ul class="nav nav-tabs d-flex justify-content-center" role="tablist">
               <li role="presentation" [ngClass]="{'active': tab === 'subject'}">
-                <a href="javascript:void(0)" (click)="onTabSelect('subject')" translate>One on One Classes</a>
+                <a href="javascript:void(0)" (click)="onTabSelect('subject')" translate>One on One Reservation</a>
               </li>
               <li role="presentation" [ngClass]="{'active': tab === 'webinar'}">
                 <a href="javascript:void(0)" (click)="onTabSelect('webinar')" translate>Consultant Group</a>
@@ -83,7 +83,7 @@
                     <app-sort [sortOption]="sortOption" [sortBy]="'paid'" (onSort)="onSort($event)"></app-sort>
                   </th>
                   <th>
-                    <span (click)="sortBy('isFree', 'desc')" translate>Lesson Type</span>
+                    <span (click)="sortBy('isFree', 'desc')" translate>Job Type</span>
                     <app-sort [sortOption]="sortOption" [sortBy]="'isFree'" (onSort)="onSort($event)"></app-sort>
                   </th>
                   <th>

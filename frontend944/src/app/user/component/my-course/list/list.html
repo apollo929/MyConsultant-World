@@ -52,7 +52,7 @@
               <thead>
                 <tr role="row">
                   <th>
-                    <span (click)="sortBy('name', 'asc')" translate>Course name</span>
+                    <span (click)="sortBy('name', 'asc')" translate>Job name</span>
                     <app-sort [sortOption]="sortOption" [sortBy]="'name'" (onSort)="onSort($event)"></app-sort>
                   </th>
 
@@ -76,7 +76,7 @@
 
               <tbody>
                 <tr *ngIf="(!course || (course && course.length === 0)) && !loading">
-                  <td colspan="10" translate>There are no course purchased</td>
+                  <td colspan="10" translate>There are no job purchased</td>
                 </tr>
                 <tr *ngIf="loading">
                   <td colspan="10" translate><span translate>Loading</span>...</td>

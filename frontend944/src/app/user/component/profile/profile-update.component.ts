@@ -17,6 +17,7 @@ import { AddCetificationComponent } from '../../../tutor/components/add-certific
 import { IUser } from '../../interface';
 import { MySubjectService } from '../../../shared/services/my-subject.service';
 import { TranslateService } from '@ngx-translate/core';
+import { element } from 'protractor';
 @Component({
   selector: 'app-profile-update',
   templateUrl: './form.html'
@@ -317,13 +318,20 @@ export class ProfileUpdateComponent implements OnInit {
   }
 
   onChangeLanguage(e: any) {
-    this.ngSelectComponent.clearAllText = '';
+    this.info.languages = [];
+    e.forEach(element => {
+      if(this.info.languages.length < 5)          //restrict language count:5
+      // this.ngSelectComponent.clearAllText = '';
+      this.info.languages.push(element.id)
+    })
+
   }
 
   onChangeGrade(event: any) {
     this.info.grades = [];
     event.forEach(element => {
-      this.info.grades.push(element.id);
+      if(this.info.grades.length < 5)
+        this.info.grades.push(element.id);
     });
     this.submit('', false);
   }
